@@ -20,7 +20,7 @@ if (WIN32)
 
 	add_executable(${EXEC} ${SOURCES})
 	target_link_libraries(${EXEC} sfml-graphics)
-	target_compile_features(${EXEC} cxx_std_17)
+	target_compile_features(${EXEC} PRIVATE cxx_std_17)
 
 	add_custom_command(
 		TARGET ${EXEC}
