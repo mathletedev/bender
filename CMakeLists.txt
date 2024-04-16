@@ -3,8 +3,11 @@ if (WIN32)
 	project(bender LANGUAGES CXX)
 
 	set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+	set(EXEC main)
+
 	option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
+	include_directories(includes)
 	include(FetchContent)
 	FetchContent_Declare(
 		SFML
@@ -13,7 +16,9 @@ if (WIN32)
 	)
 	FetchContent_MakeAvailable(SFML)
 
-	add_executable(${EXEC} src/*.cpp)
+	file(GLOB SOURCES src/*.cpp)
+
+	add_executable(${EXEC} ${SOURCES})
 	target_link_libraries(${EXEC} sfml-graphics)
 	target_compile_features(${EXEC} cxx_std_17)
 
