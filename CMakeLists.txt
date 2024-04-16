@@ -13,9 +13,9 @@ if (WIN32)
 	)
 	FetchContent_MakeAvailable(SFML)
 
-	add_executable(${EXEC} src/main.cpp)
-	target_link_libraries(${EXEC} PRIVATE sfml-graphics)
-	target_compile_features(${EXEC} PRIVATE cxx_std_17)
+	add_executable(${EXEC} src/*.cpp)
+	target_link_libraries(${EXEC} sfml-graphics)
+	target_compile_features(${EXEC} cxx_std_17)
 
 	add_custom_command(
 		TARGET ${EXEC}
