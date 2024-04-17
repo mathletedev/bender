@@ -11,8 +11,9 @@ int main() {
 	camera camera;
 	camera.transform.position = {0, 0, 1};
 
-	solid cube(&camera);
-	solid icosahedron(&camera); 
+	srand((unsigned)time(NULL)); 
+	solid cube(sf::Color::Magenta, &camera);
+	//solid icosahedron(&camera); 
 	//cube.add_vertex({-0.5, -0.5, -0.5});
 	//cube.add_vertex({-0.5, -0.5, 0.5});
 	//cube.add_vertex({-0.5, 0.5, -0.5});
@@ -49,9 +50,29 @@ int main() {
 	cube.add_vertex({jits, -jitses, jit});
 	cube.add_vertex({jits, jitses, jit});
 
+	cube.add_face({0, 4, 5}); //olive green
+	cube.add_face({3, 4, 5}); //macaroni orange
+	cube.add_face({3, 4, 10}); //orange yellow
+	cube.add_face({0, 4, 8}); //mahogany
+	cube.add_face({4, 8, 10}); //poop
+	cube.add_face({6, 8, 10}); // green
+	cube.add_face({1, 3, 10}); //dark navy blue
+	cube.add_face({1, 6, 10}); //salmon
+	cube.add_face({2, 6, 8}); //green but darker
+	cube.add_face({0, 2, 8}); //grape
+	cube.add_face({1, 6, 7}); //scarlet
+	cube.add_face({2, 6, 7}); //light salmon
+	cube.add_face({0, 2, 9}); //light grape
+	cube.add_face({2, 7, 9}); //smoothie
+	cube.add_face({0, 5, 9}); //cyan
+	cube.add_face({1, 7, 11}); //dark blue
+	cube.add_face({1, 3, 11}); 
+	cube.add_face({7, 9, 11}); 
+	cube.add_face({3, 5, 11}); 
+	cube.add_face({5, 9, 11}); 
 
 	cube.transform.position = {500, 500, 0};
-	cube.transform.scale = {100, 100, 100};
+	cube.transform.scale = {300, 300, 300};
 
 	sf::Clock clock;
 
@@ -66,8 +87,10 @@ int main() {
 		if (clock.getElapsedTime().asSeconds() < 1.0 / FPS) continue;
 		clock.restart();
 
-		cube.transform.rotation.y += 0.05;
-		cube.transform.rotation.x += 0.05;
+		cube.transform.rotation.y += 0.03;
+		cube.transform.rotation.x += 0.03;
+		cube.transform.rotation.z += 0.03;
+
 
 		window.clear();
 

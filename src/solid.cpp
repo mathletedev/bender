@@ -17,16 +17,18 @@ void solid::add_face(std::vector<int> const &face) {
 }
 
 void solid::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-	// for (auto const &vertex : vertices_) {
-	// 	matrix point = camera_->get_projection_matrix(vertex.z) *
-	// 		       transform.to_matrix() * vertex;
+	 for (auto const &vertex : vertices_) {
+	 	matrix point = camera_->get_projection_matrix(vertex.z) *
+	 		       transform.to_matrix() * vertex;
 
-	// 	sf::CircleShape circle(5);
-	// 	circle.setPosition(point.get(0, 0), point.get(1, 0));
-	// 	circle.setOrigin(5, 5);
+	 	sf::CircleShape circle(5);
+	 	circle.setPosition(point.get(0, 0), point.get(1, 0));
+	 	circle.setOrigin(5, 5);
 
-	// 	target.draw(circle, states);
-	// }
+	 	target.draw(circle, states);
+	 }
+
+	 int j = 400;
 
 	for (auto const &face : faces_) {
 		sf::VertexArray lines(sf::LinesStrip, face.size() + 1);
@@ -45,8 +47,13 @@ void solid::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 					    (float)point.get(1, 0)});
 		}
 
-		convex.setFillColor(color_);
+		//srand((unsigned)time(NULL)); 
+		srand(j); 
+		convex.setFillColor(sf::Color(rand() % 255, rand() % 255, rand() % 255)); //random color
+		//convex.setFillColor(color_); //not random color
+
 
 		target.draw(convex, states);
+		j++; 
 	}
 }
