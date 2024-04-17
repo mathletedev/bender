@@ -1,0 +1,10 @@
+BasedOnStyle: LLVM
+
+AccessModifierOffset: 0
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: true
+AlwaysBreakTemplateDeclarations: true
+IndentAccessModifiers: true
+IndentWidth: 8
+NamespaceIndentation: All
+UseTab: Always
