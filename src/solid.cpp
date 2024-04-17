@@ -28,8 +28,19 @@ void solid::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 	 	target.draw(circle, states);
 	 }
 
-	 int j = 400;
+	// for (auto const &vertex : vertices_) {
+	// 	matrix point = camera_->get_projection_matrix(vertex.z) *
+	// 		       transform.to_matrix() * vertex;
 
+	// 	sf::CircleShape circle(5);
+	// 	circle.setPosition(point.get(0, 0), point.get(1, 0));
+	// 	circle.setOrigin(5, 5);
+
+	// 	target.draw(circle, states);
+	// }
+
+	int j = 400; 
+	
 	for (auto const &face : faces_) {
 		sf::VertexArray lines(sf::LinesStrip, face.size() + 1);
 
