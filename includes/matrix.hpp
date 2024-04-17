@@ -20,6 +20,7 @@ class matrix {
 		void print() const;
 
 		matrix operator+(matrix const &rhs);
+		matrix operator-(matrix const &rhs);
 		matrix operator*(matrix const &rhs);
 		matrix operator*(double const &rhs);
 

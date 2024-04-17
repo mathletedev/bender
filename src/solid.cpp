@@ -1,8 +1,11 @@
 #include "solid.hpp"
 
-solid::solid(sf::Color const &color, camera *const &camera) {
-	color_ = color;
+solid::solid(camera *const &camera) {
 	camera_ = camera;
+}
+
+void solid::set_color(sf::Color const &color) {
+	color_ = color;
 }
 
 void solid::add_vertex(sf::Vector3f const &vertex) {
@@ -16,7 +19,7 @@ void solid::add_face(std::vector<int> const &face) {
 	faces_.push_back(face);
 }
 
-void solid::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+void solid::draw(std::priority_queue<render_object> &objects) const {
 	// for (auto const &vertex : vertices_) {
 	// 	matrix point = camera_->get_projection_matrix(vertex.z) *
 	// 		       transform.to_matrix() * vertex;
@@ -29,24 +32,51 @@ void solid::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 	// }
 
 	for (auto const &face : faces_) {
-		sf::VertexArray lines(sf::LinesStrip, face.size() + 1);
+		sf::ConvexShape *convex = new sf::ConvexShape();
+		convex->setPointCount(face.size());
 
-		sf::ConvexShape convex;
-		convex.setPointCount(face.size());
+		std::vector<sf::Vector2f> points(face.size());
+
+		std::vector<double> zs(face.size());
+		double min_z = std::numeric_limits<double>::max();
 
 		for (int i = 0; i < face.size(); ++i) {
 			sf::Vector3f vertex = vertices_[face[i]];
 
+			zs[i] = vertex.z;
+			min_z = std::min<double>(min_z, vertex.z);
+
 			matrix point =
 			    camera_->get_projection_matrix(vertex.z) *
 			    transform.to_matrix() * vertex;
+			points[i] = {(float)point.get(0, 0),
+				     (float)point.get(1, 0)};
 
-			convex.setPoint(i, {(float)point.get(0, 0),
-					    (float)point.get(1, 0)});
+			convex->setPoint(i, {(float)point.get(0, 0),
+					     (float)point.get(1, 0)});
 		}
 
-		convex.setFillColor(color_);
+		convex->setFillColor(color_);
 
-		target.draw(convex, states);
+		objects.push(render_object(convex, min_z));
+
+		for (int i = 0; i <= face.size(); ++i) {
+			sf::Vector2f point1 = points[i % face.size()];
+			sf::Vector2f point2 = points[(i + 1) % face.size()];
+
+			double length = utils::distance(point1, point2);
+			double angle = utils::angle(point1, point2);
+
+			sf::RectangleShape *line =
+
+			    new sf::RectangleShape(sf::Vector2f(length, 2));
+			line->rotate(angle * 180 / M_PI);
+			line->setPosition(point1);
+			line->setFillColor(sf::Color::White);
+
+			objects.push(render_object(
+			    line, std::min(zs[i % face.size()],
+					   zs[(i + 1) % face.size()])));
+		}
 	}
 }

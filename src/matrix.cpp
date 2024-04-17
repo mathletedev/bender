@@ -69,6 +69,20 @@ matrix matrix::operator+(matrix const &rhs) {
 	return res;
 }
 
+matrix matrix::operator-(matrix const &rhs) {
+	if (rows_ != rhs.rows_ || cols_ != rhs.cols_)
+		throw std::invalid_argument("Matrix dimensions do not match");
+
+	matrix res(rows_, cols_);
+
+	for (int i = 0; i < rows_; ++i) {
+		for (int j = 0; j < cols_; ++j)
+			res.data_[i][j] = data_[i][j] - rhs.data_[i][j];
+	}
+
+	return res;
+}
+
 matrix matrix::operator*(matrix const &rhs) {
 	if (cols_ != rhs.rows_)
 		throw std::invalid_argument("Matrix dimensions do not match");
