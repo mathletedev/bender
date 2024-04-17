@@ -1,12 +1,10 @@
 #include "renderobject.hpp"
+#include <iostream>
 
-render_object::render_object(sf::Drawable *const drawable, double const &z) {
+render_object::render_object(std::shared_ptr<sf::Drawable> const &drawable,
+			     double const &z) {
 	drawable_ = drawable;
 	z_ = z;
-}
-
-render_object::~render_object() {
-	delete drawable_;
 }
 
 void render_object::draw(sf::RenderTarget &target,

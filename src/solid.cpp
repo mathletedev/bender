@@ -34,7 +34,7 @@ void solid::draw(std::priority_queue<render_object> &objects) const {
 	int j = 400;
 
 	for (auto const &face : faces_) {
-		sf::ConvexShape *convex = new sf::ConvexShape();
+		auto convex = std::make_shared<sf::ConvexShape>();
 		convex->setPointCount(face.size());
 
 		std::vector<sf::Vector2f> points(face.size());
@@ -69,9 +69,8 @@ void solid::draw(std::priority_queue<render_object> &objects) const {
 			double length = utils::distance(point1, point2);
 			double angle = utils::angle(point1, point2);
 
-			sf::RectangleShape *line =
-
-			    new sf::RectangleShape(sf::Vector2f(length, 2));
+			auto line = std::make_shared<sf::RectangleShape>(
+			    sf::Vector2f(length, 2));
 			line->rotate(angle * 180 / M_PI);
 			line->setPosition(point1);
 			line->setFillColor(sf::Color::White);
