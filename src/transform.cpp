@@ -1,7 +1,6 @@
 #include "transform.hpp"
 
-transform::transform(sf::Vector3f position, sf::Vector3f rotation,
-		     sf::Vector3f scale) {
+transform::transform(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale) {
 	this->position = position;
 	this->rotation = rotation;
 	this->scale = scale;

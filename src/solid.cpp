@@ -31,6 +31,8 @@ void solid::draw(std::priority_queue<render_object> &objects) const {
 	// 	target.draw(circle, states);
 	// }
 
+	int j = 400;
+
 	for (auto const &face : faces_) {
 		sf::ConvexShape *convex = new sf::ConvexShape();
 		convex->setPointCount(face.size());
@@ -78,5 +80,14 @@ void solid::draw(std::priority_queue<render_object> &objects) const {
 			    line, std::min(zs[i % face.size()],
 					   zs[(i + 1) % face.size()])));
 		}
+
+		////srand((unsigned)time(NULL));
+		// srand(j);
+		// convex.setFillColor(sf::Color(rand() % 255, rand() % 255,
+		// rand() % 255)); //random color
+		////convex.setFillColor(color_); //not random color
+
+		// target.draw(convex, states);
+		// j++;
 	}
 }
