@@ -50,30 +50,24 @@ int main() {
 	cube.add_vertex({jits, jitses, jit});
 
 
-
 	cube.transform.position = {500, 500, 0};
 	cube.transform.scale = {100, 100, 100};
 
 	sf::Clock clock;
-	bool redraw = true;
 
 	sf::Event event;
 
 	while (window.isOpen()) {
-		// https://en.sfml-dev.org/forums/index.php?topic=10031.0
-		if (clock.getElapsedTime().asSeconds() >= 1.0 / FPS) {
-			clock.restart();
-
-			redraw = true;
-
-			cube.transform.rotation.x += 0.02;
-			cube.transform.rotation.y += 0.04;
-			cube.transform.rotation.z += 0.06;
-		}
-
 		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) window.close();
 		}
+
+		// https://en.sfml-dev.org/forums/index.php?topic=10031.0
+		if (clock.getElapsedTime().asSeconds() < 1.0 / FPS) continue;
+		clock.restart();
+
+		cube.transform.rotation.y += 0.05;
+		cube.transform.rotation.x += 0.05;
 
 		window.clear();
 
