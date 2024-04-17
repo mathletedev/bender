@@ -7,6 +7,7 @@
 enum PRIORITIES {
 	PLANE = 0,
 	LINE = 1,
+	POINT = 2,
 };
 
 class render_object : public sf::Drawable {

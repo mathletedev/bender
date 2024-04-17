@@ -6,6 +6,8 @@
 #include "solid.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
+#include <cstdlib>
+#include <ctime>
 #include <queue>
 
 class manager {

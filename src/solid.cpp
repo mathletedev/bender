@@ -20,19 +20,22 @@ void solid::add_face(std::vector<int> const &face) {
 }
 
 void solid::draw(std::priority_queue<render_object> &objects) const {
-	// for (auto const &vertex : vertices_) {
-	// 	matrix point = camera_->get_projection_matrix(vertex.z) *
-	// 		       transform.to_matrix() * vertex;
+	// vertices
+	for (auto const &vertex : vertices_) {
+		matrix transformed = transform.to_matrix() * vertex;
+		matrix point =
+		    camera_->get_projection_matrix(vertex.z) * transformed;
 
-	// 	sf::CircleShape circle(5);
-	// 	circle.setPosition(point.get(0, 0), point.get(1, 0));
-	// 	circle.setOrigin(5, 5);
+		auto circle = std::make_shared<sf::CircleShape>(5);
+		circle->setPosition(point.get(0, 0), point.get(1, 0));
+		circle->setOrigin(5, 5);
+		circle->setFillColor(sf::Color::White);
 
-	// 	target.draw(circle, states);
-	// }
+		objects.push(render_object(circle, transformed.get(2, 0),
+					   PRIORITIES::POINT));
+	}
 
-	int j = 400;
-
+	// faces
 	for (auto const &face : faces_) {
 		auto convex = std::make_shared<sf::ConvexShape>();
 		convex->setPointCount(face.size());
@@ -61,10 +64,13 @@ void solid::draw(std::priority_queue<render_object> &objects) const {
 					     (float)point.get(1, 0)});
 		}
 
-		convex->setFillColor(color_);
+		convex->setFillColor(
+		    sf::Color(rand() % 255, rand() % 255, rand() % 255));
+		// convex->setFillColor(color_);
 
 		objects.push(render_object(convex, min_z, PRIORITIES::PLANE));
 
+		// edges
 		for (int i = 0; i <= face.size(); ++i) {
 			sf::Vector2f point1 = points[i % face.size()];
 			sf::Vector2f point2 = points[(i + 1) % face.size()];
@@ -85,14 +91,5 @@ void solid::draw(std::priority_queue<render_object> &objects) const {
 						   zs[(i + 1) % face.size()]),
 					  PRIORITIES::LINE));
 		}
-
-		////srand((unsigned)time(NULL));
-		// srand(j);
-		// convex.setFillColor(sf::Color(rand() % 255, rand() % 255,
-		// rand() % 255)); //random color
-		////convex.setFillColor(color_); //not random color
-
-		// target.draw(convex, states);
-		// j++;
 	}
 }
