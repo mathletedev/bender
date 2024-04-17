@@ -11,7 +11,7 @@ int main() {
 	camera camera;
 	camera.transform.position = {0, 0, 1};
 
-	solid cube(&camera);
+	solid cube(sf::Color::Magenta, &camera);
 	cube.add_vertex({-0.5, -0.5, -0.5});
 	cube.add_vertex({-0.5, -0.5, 0.5});
 	cube.add_vertex({-0.5, 0.5, 0.5});

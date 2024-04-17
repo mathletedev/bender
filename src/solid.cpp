@@ -1,6 +1,7 @@
 #include "solid.hpp"
 
-solid::solid(camera *const &camera) {
+solid::solid(sf::Color const &color, camera *const &camera) {
+	color_ = color;
 	camera_ = camera;
 }
 
@@ -16,16 +17,16 @@ void solid::add_face(std::vector<int> const &face) {
 }
 
 void solid::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-	for (auto const &vertex : vertices_) {
-		matrix point = camera_->get_projection_matrix(vertex.z) *
-			       transform.to_matrix() * vertex;
+	// for (auto const &vertex : vertices_) {
+	// 	matrix point = camera_->get_projection_matrix(vertex.z) *
+	// 		       transform.to_matrix() * vertex;
 
-		sf::CircleShape circle(5);
-		circle.setPosition(point.get(0, 0), point.get(1, 0));
-		circle.setOrigin(5, 5);
+	// 	sf::CircleShape circle(5);
+	// 	circle.setPosition(point.get(0, 0), point.get(1, 0));
+	// 	circle.setOrigin(5, 5);
 
-		target.draw(circle, states);
-	}
+	// 	target.draw(circle, states);
+	// }
 
 	for (auto const &face : faces_) {
 		sf::VertexArray lines(sf::LinesStrip, face.size() + 1);
@@ -44,7 +45,7 @@ void solid::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 					    (float)point.get(1, 0)});
 		}
 
-		convex.setFillColor(sf::Color::White);
+		convex.setFillColor(color_);
 
 		target.draw(convex, states);
 	}
