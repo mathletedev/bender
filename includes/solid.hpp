@@ -10,6 +10,7 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/Vertex.hpp>
 #include <SFML/System/Vector3.hpp>
+#include <cmath>
 #include <limits>
 #include <memory>
 #include <queue>
