@@ -45,12 +45,15 @@ void solid::draw(std::priority_queue<render_object> &objects) const {
 		for (int i = 0; i < face.size(); ++i) {
 			sf::Vector3f vertex = vertices_[face[i]];
 
-			zs[i] = vertex.z;
-			min_z = std::min<double>(min_z, vertex.z);
+			matrix transformed = transform.to_matrix() * vertex;
+
+			zs[i] = transformed.get(2, 0);
+			min_z = std::min<double>(min_z, zs[i]);
 
 			matrix point =
 			    camera_->get_projection_matrix(vertex.z) *
-			    transform.to_matrix() * vertex;
+			    transformed;
+
 			points[i] = {(float)point.get(0, 0),
 				     (float)point.get(1, 0)};
 
@@ -60,7 +63,7 @@ void solid::draw(std::priority_queue<render_object> &objects) const {
 
 		convex->setFillColor(color_);
 
-		objects.push(render_object(convex, min_z));
+		objects.push(render_object(convex, min_z, PRIORITIES::PLANE));
 
 		for (int i = 0; i <= face.size(); ++i) {
 			sf::Vector2f point1 = points[i % face.size()];
@@ -70,14 +73,17 @@ void solid::draw(std::priority_queue<render_object> &objects) const {
 			double angle = utils::angle(point1, point2);
 
 			auto line = std::make_shared<sf::RectangleShape>(
-			    sf::Vector2f(length, 2));
+			    sf::Vector2f(length, 4));
 			line->rotate(angle * 180 / M_PI);
 			line->setPosition(point1);
+			line->setOrigin(0, 2);
 			line->setFillColor(sf::Color::White);
 
-			objects.push(render_object(
-			    line, std::min(zs[i % face.size()],
-					   zs[(i + 1) % face.size()])));
+			objects.push(
+			    render_object(line,
+					  std::min(zs[i % face.size()],
+						   zs[(i + 1) % face.size()]),
+					  PRIORITIES::LINE));
 		}
 
 		////srand((unsigned)time(NULL));
