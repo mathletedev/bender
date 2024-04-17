@@ -1,5 +1,7 @@
 #pragma once
 
+#define _USE_MATH_DEFINES
+
 #include "camera.hpp"
 #include "renderobject.hpp"
 #include "transform.hpp"
