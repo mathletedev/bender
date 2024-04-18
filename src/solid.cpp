@@ -30,7 +30,7 @@ void solid::render_into(std::priority_queue<render_object> &objects) const {
 		auto circle = std::make_shared<sf::CircleShape>(5);
 		circle->setPosition(point.get(0, 0), point.get(1, 0));
 		circle->setOrigin(5, 5);
-		circle->setFillColor(sf::Color::White);
+		circle->setFillColor(sf::Color::Transparent);
 
 		objects.push(render_object(circle, transformed.get(2, 0),
 					   PRIORITIES::POINT));
