@@ -5,13 +5,14 @@
 #include <fstream>
 #include <string>
 
-class import {
+class importer {
 	public:
-		~import() {
+		~importer() {
 			import_stream_.close();
 		};
+
 		virtual solid import_file(std::string &path,
-					  camera *const &camera_) = 0;
+					  camera *const &camera) = 0;
 
 	protected:
 		std::ifstream import_stream_;

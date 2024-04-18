@@ -30,7 +30,8 @@ class solid {
 		void add_vertex(sf::Vector3f const &vertex);
 		void add_face(std::vector<int> const &face);
 
-		void draw(std::priority_queue<render_object> &objects) const;
+		void
+		render_into(std::priority_queue<render_object> &objects) const;
 
 	protected:
 		std::vector<sf::Vector3f> vertices_;

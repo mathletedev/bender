@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include <vector>
 
+// useful for manipulating transforms
 class matrix {
 	public:
 		matrix(int const &rows = 0, int const &cols = 0);

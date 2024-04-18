@@ -48,6 +48,7 @@ manager::manager() {
 	solids_.push_back(icosaedron);
 }
 
+// main loop
 void manager::run() {
 	while (window_.isOpen()) {
 		while (window_.pollEvent(event_)) {
@@ -61,6 +62,7 @@ void manager::run() {
 	}
 }
 
+// updates every 1 / FPS seconds
 void manager::update() {
 	solids_[0].transform.rotation.y += 0.05;
 	solids_[0].transform.rotation.x += 0.05;
@@ -81,11 +83,13 @@ void manager::update() {
 	window_.display();
 }
 
+// puts solids into objects queue
 void manager::process_solids() {
 	for (auto &solid : solids_)
-		solid.draw(objects_);
+		solid.render_into(objects_);
 }
 
+// draw all objects to window
 void manager::render_all() {
 	while (!objects_.empty()) {
 		window_.draw(objects_.top());

@@ -34,6 +34,11 @@ if (WIN32)
 	)
 
 	install(TARGETS ${EXEC})
+
+	add_custom_command(
+		TARGET ${EXEC} POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy "..\\data\\monkey.obj" ".\\data\\monkey.obj"
+	)
 else()
 	set(CMAKE_CXX_STANDARD 14)
 	set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -41,9 +46,9 @@ else()
 	find_package(SFML 2.5 COMPONENTS graphics REQUIRED)
 
 	target_link_libraries(${EXEC} sfml-graphics)
-endif()
 
-add_custom_command(
-	TARGET ${EXEC} POST_BUILD
-	COMMAND ${CMAKE_COMMAND} -E copy "../data/monkey.obj" "./data/monkey.obj"
-)
+	add_custom_command(
+		TARGET ${EXEC} POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy "../data/monkey.obj" "./data/monkey.obj"
+	)
+endif()

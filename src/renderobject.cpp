@@ -13,6 +13,7 @@ void render_object::draw(sf::RenderTarget &target,
 	target.draw(*drawable_, states);
 }
 
+// used for sorting into priority queue
 bool render_object::operator<(render_object const &rhs) const {
 	if (z_ == rhs.z_) return priority_ > rhs.priority_;
 	return (z_ < rhs.z_);

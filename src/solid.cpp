@@ -19,7 +19,8 @@ void solid::add_face(std::vector<int> const &face) {
 	faces_.push_back(face);
 }
 
-void solid::draw(std::priority_queue<render_object> &objects) const {
+// convert solid into render_objects and push into queue
+void solid::render_into(std::priority_queue<render_object> &objects) const {
 	// vertices
 	for (auto const &vertex : vertices_) {
 		matrix transformed = transform.to_matrix() * vertex;
@@ -42,6 +43,7 @@ void solid::draw(std::priority_queue<render_object> &objects) const {
 
 		std::vector<sf::Vector2f> points(face.size());
 
+		// store z-indices and keep minimum
 		std::vector<double> zs(face.size());
 		double min_z = std::numeric_limits<double>::max();
 
@@ -78,6 +80,7 @@ void solid::draw(std::priority_queue<render_object> &objects) const {
 			double length = utils::distance(point1, point2);
 			double angle = utils::angle(point1, point2);
 
+			// no line shape, so rotate a rectangle
 			auto line = std::make_shared<sf::RectangleShape>(
 			    sf::Vector2f(length, 4));
 			line->rotate(angle * 180 / M_PI);

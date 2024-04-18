@@ -6,6 +6,8 @@ matrix::matrix(int const &rows, int const &cols) {
 	data_.assign(rows, std::vector<double>(cols, 0));
 }
 
+// converts a Vector3f into a matrix
+// decided to use a column-major matrix
 matrix::matrix(sf::Vector3f const &data) {
 	rows_ = 4;
 	cols_ = 1;
@@ -83,6 +85,7 @@ matrix matrix::operator-(matrix const &rhs) {
 	return res;
 }
 
+// matrix multiplication, NOT elemnt-wise multiplication
 matrix matrix::operator*(matrix const &rhs) {
 	if (cols_ != rhs.rows_)
 		throw std::invalid_argument("Matrix dimensions do not match");
