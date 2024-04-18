@@ -10,19 +10,17 @@ manager::manager() {
 	camera_ = camera();
 	camera_.transform.position = {0, 0, 1};
 
-
-	// idk how to set path correctly relative to project, NEEDS FIXING 
-	string path = "C:\\Github\\bender\\data\\monkey.obj";
+	std::string path = "./data/monkey.obj";
 	import_obj obj_importer;
 	solid monke = obj_importer.import_file(path, &camera_);
-	monke.set_color(sf::Color::Magenta);
+	monke.set_color(sf::Color::Transparent);
 	monke.transform.position = {200, 600, 0};
 	monke.transform.scale = {100, 100, 100};
 
 	solids_.push_back(monke);
 
 	solid tetrahedron = polyhedra::make_tetrahedron(&camera_);
-	tetrahedron.set_color(sf::Color::Magenta);
+	tetrahedron.set_color(sf::Color::Cyan);
 	tetrahedron.transform.position = {400, 600, 0};
 	tetrahedron.transform.scale = {100, 100, 100};
 
@@ -36,14 +34,14 @@ manager::manager() {
 	solids_.push_back(cube);
 
 	solid octahedron = polyhedra::make_octahedron(&camera_);
-	octahedron.set_color(sf::Color::Magenta);
+	octahedron.set_color(sf::Color::Yellow);
 	octahedron.transform.position = {600, 400, 0};
 	octahedron.transform.scale = {100, 100, 100};
 
 	solids_.push_back(octahedron);
 
 	solid icosaedron = polyhedra::make_icosaedron(&camera_);
-	icosaedron.set_color(sf::Color::Magenta);
+	icosaedron.set_color(sf::Color::Blue);
 	icosaedron.transform.position = {600, 600, 0};
 	icosaedron.transform.scale = {100, 100, 100};
 

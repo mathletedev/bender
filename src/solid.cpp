@@ -64,9 +64,9 @@ void solid::draw(std::priority_queue<render_object> &objects) const {
 					     (float)point.get(1, 0)});
 		}
 
-		convex->setFillColor(
-		    sf::Color(rand() % 255, rand() % 255, rand() % 255));
-		// convex->setFillColor(color_);
+		// convex->setFillColor(
+		// sf::Color(rand() % 255, rand() % 255, rand() % 255));
+		convex->setFillColor(color_);
 
 		objects.push(render_object(convex, min_z, PRIORITIES::PLANE));
 

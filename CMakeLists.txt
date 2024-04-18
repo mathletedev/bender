@@ -1,13 +1,20 @@
-if (WIN32)
-	cmake_minimum_required(VERSION 3.16)
-	project(bender LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.16)
 
+project(bender LANGUAGES CXX)
+
+set(EXEC main)
+
+include_directories(includes)
+
+file(GLOB SOURCES src/*.cpp)
+
+add_executable(${EXEC} ${SOURCES})
+
+if (WIN32)
 	set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-	set(EXEC main)
 
 	option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
-	include_directories(includes)
 	include(FetchContent)
 	FetchContent_Declare(
 		SFML
@@ -16,9 +23,6 @@ if (WIN32)
 	)
 	FetchContent_MakeAvailable(SFML)
 
-	file(GLOB SOURCES src/*.cpp)
-
-	add_executable(${EXEC} ${SOURCES})
 	target_link_libraries(${EXEC} sfml-graphics)
 	target_compile_features(${EXEC} PRIVATE cxx_std_17)
 
@@ -31,21 +35,15 @@ if (WIN32)
 
 	install(TARGETS ${EXEC})
 else()
-	cmake_minimum_required(VERSION 3.27)
-
-	project(bender)
-
 	set(CMAKE_CXX_STANDARD 14)
 	set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-	set(EXEC main)
-
-	include_directories(includes)
-
-	file(GLOB SOURCES src/*.cpp)
 
 	find_package(SFML 2.5 COMPONENTS graphics REQUIRED)
 
-	add_executable(${EXEC} ${SOURCES})
-
 	target_link_libraries(${EXEC} sfml-graphics)
 endif()
+
+add_custom_command(
+	TARGET ${EXEC} POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy "../data/monkey.obj" "./data/monkey.obj"
+)
