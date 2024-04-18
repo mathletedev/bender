@@ -3,6 +3,7 @@
 #include "camera.hpp"
 #include "polyhedra.hpp"
 #include "renderobject.hpp"
+#include "import_obj.hpp"
 #include "solid.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>

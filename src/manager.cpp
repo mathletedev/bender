@@ -10,6 +10,17 @@ manager::manager() {
 	camera_ = camera();
 	camera_.transform.position = {0, 0, 1};
 
+
+	// idk how to set path correctly relative to project, NEEDS FIXING 
+	string path = "C:\\Github\\bender\\data\\monkey.obj";
+	import_obj obj_importer;
+	solid monke = obj_importer.import_file(path, &camera_);
+	monke.set_color(sf::Color::Magenta);
+	monke.transform.position = {200, 600, 0};
+	monke.transform.scale = {100, 100, 100};
+
+	solids_.push_back(monke);
+
 	solid tetrahedron = polyhedra::make_tetrahedron(&camera_);
 	tetrahedron.set_color(sf::Color::Magenta);
 	tetrahedron.transform.position = {400, 600, 0};
@@ -61,6 +72,8 @@ void manager::update() {
 	solids_[2].transform.rotation.x += 0.05;
 	solids_[3].transform.rotation.y += 0.05;
 	solids_[3].transform.rotation.x += 0.05;
+	solids_[4].transform.rotation.y += 0.05;
+	solids_[4].transform.rotation.x += 0.05;
 
 	window_.clear();
 
