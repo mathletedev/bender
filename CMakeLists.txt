@@ -37,7 +37,7 @@ if (WIN32)
 
 	add_custom_command(
 		TARGET ${EXEC} POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy "..\\data\\monkey.obj" ".\\data\\monkey.obj"
+		COMMAND ${CMAKE_COMMAND} -E copy "${PROJECT_SOURCE_DIR}\\data\\monkey.obj" ".\\data\\monkey.obj"
 	)
 else()
 	set(CMAKE_CXX_STANDARD 14)
