@@ -1,5 +1,6 @@
 #include "manager.hpp"
 
+//manager constructor
 manager::manager() {
 	srand(time(0));
 
