@@ -62,7 +62,7 @@ solid polyhedra::make_octahedron(camera *camera) {
 	return octahedron;
 }
 
-solid polyhedra::make_icosaedron(camera *camera) {
+solid polyhedra::make_icosahedron(camera *camera) {
 	solid icosahedron(camera);
 
 	// eric's jit

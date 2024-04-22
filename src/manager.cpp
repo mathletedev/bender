@@ -41,12 +41,12 @@ manager::manager() {
 
 	solids_.push_back(octahedron);
 
-	solid icosaedron = polyhedra::make_icosaedron(&camera_);
-	icosaedron.set_color(sf::Color::Blue);
-	icosaedron.transform.position = {600, 600, 0};
-	icosaedron.transform.scale = {100, 100, 100};
+	solid icosahedron = polyhedra::make_icosahedron(&camera_);
+	icosahedron.set_color(sf::Color::Blue);
+	icosahedron.transform.position = {600, 600, 0};
+	icosahedron.transform.scale = {100, 100, 100};
 
-	solids_.push_back(icosaedron);
+	solids_.push_back(icosahedron);
 }
 
 // main loop
