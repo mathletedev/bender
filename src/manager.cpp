@@ -11,39 +11,37 @@ manager::manager() {
 	camera_ = camera();
 	camera_.transform.position = {0, 0, 1};
 
-	//std::string path = "./data/monkey.obj";
-	//import_obj obj_importer;
-	//solid monke = obj_importer.import_file(path, &camera_);
-	//monke.set_color(sf::Color::Magenta);
-	//monke.transform.position = {0, 0, 10};
-	//monke.transform.scale = {3, 3, 3}; 
+	std::string path = "./data/monkey.obj";
+	import_obj obj_importer;
+	solid monke = obj_importer.import_file(path, &camera_);
+	monke.set_color(sf::Color::Transparent);
+	monke.transform.position = {-3, 0, 5};
 
-	//solids_.push_back(monke);
+	solids_.push_back(monke);
 
-	//solid tetrahedron = polyhedra::make_tetrahedron(&camera_);
-	//tetrahedron.set_color(sf::Color::Cyan);
-	//tetrahedron.transform.position = {5, 5, 0};
+	solid tetrahedron = polyhedra::make_tetrahedron(&camera_);
+	tetrahedron.set_color(sf::Color::Cyan);
+	tetrahedron.transform.position = {3, 3, 5};
 
-	//solids_.push_back(tetrahedron);
+	solids_.push_back(tetrahedron);
 
 	solid cube = polyhedra::make_cube(&camera_);
 	cube.set_color(sf::Color::White);
-	cube.transform.position = {0, 0, 10};
-	cube.transform.scale = {4, 4, 4};
+	cube.transform.position = {0, 0, 5};
 
 	solids_.push_back(cube);
 
-	//solid octahedron = polyhedra::make_octahedron(&camera_);
-	//octahedron.set_color(sf::Color::Yellow);
-	//octahedron.transform.position = {10, 15, 0};
+	solid octahedron = polyhedra::make_octahedron(&camera_);
+	octahedron.set_color(sf::Color::Yellow);
+	octahedron.transform.position = {0, 3, 5};
 
-	//solids_.push_back(octahedron);
+	solids_.push_back(octahedron);
 
-	//solid icosahedron = polyhedra::make_icosahedron(&camera_);
-	//icosahedron.set_color(sf::Color::Blue);
-	//icosahedron.transform.position = {10, 5, 0};
+	solid icosahedron = polyhedra::make_icosahedron(&camera_);
+	icosahedron.set_color(sf::Color::Blue);
+	icosahedron.transform.position = {-3, 3, 5};
 
-	//solids_.push_back(icosahedron);
+	solids_.push_back(icosahedron);
 }
 
 // main loop
