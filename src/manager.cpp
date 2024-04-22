@@ -14,8 +14,9 @@ manager::manager() {
 	//std::string path = "./data/monkey.obj";
 	//import_obj obj_importer;
 	//solid monke = obj_importer.import_file(path, &camera_);
-	//monke.set_color(sf::Color::Transparent);
-	//monke.transform.position = {15, 15, 0};
+	//monke.set_color(sf::Color::Magenta);
+	//monke.transform.position = {0, 0, 10};
+	//monke.transform.scale = {3, 3, 3}; 
 
 	//solids_.push_back(monke);
 
@@ -26,7 +27,7 @@ manager::manager() {
 	//solids_.push_back(tetrahedron);
 
 	solid cube = polyhedra::make_cube(&camera_);
-	cube.set_color(sf::Color::Transparent);
+	cube.set_color(sf::Color::White);
 	cube.transform.position = {0, 0, 10};
 	cube.transform.scale = {4, 4, 4};
 

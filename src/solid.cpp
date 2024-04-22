@@ -101,7 +101,11 @@ void solid::render_into(std::priority_queue<render_object> &objects) const {
 			line->rotate(angle * 180 / M_PI);
 			line->setPosition(point1);
 			line->setOrigin(0, 2);
-			line->setFillColor(sf::Color::White);
+			if (color_ == sf::Color::White) {
+				line->setFillColor(sf::Color(128, 128, 128)); 
+			} else {
+				line->setFillColor(sf::Color::White);
+			}
 
 			objects.push(
 			    render_object(line,
