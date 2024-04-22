@@ -25,27 +25,27 @@ void solid::render_into(std::priority_queue<render_object> &objects) const {
 
 	double screen_width = 1000, screen_height = 1000, pixel_scaling = 500;
 
-	for (auto const &vertex : vertices_) {
-		// get x,y,z after transformations
-		matrix transformed = transform.to_matrix() * vertex;
+	//for (auto const &vertex : vertices_) {
+	//	// get x,y,z after transformations
+	//	matrix transformed = transform.to_matrix() * vertex;
 
-		//get projected point
-		matrix point =
-		    camera_->get_projection_matrix() * transformed;
+	//	//get projected point
+	//	matrix point =
+	//	    camera_->get_projection_matrix() * transformed;
 
-		// perpspective divide
-		point.set(0, 0, (point.get(0, 0) / point.get(3, 0) * pixel_scaling) + screen_width / 2);
-		point.set(1, 0, (point.get(1, 0) / point.get(3, 0) * pixel_scaling) + screen_height / 2);
+	//	// perpspective divide
+	//	point.set(0, 0, (point.get(0, 0) / point.get(3, 0) * pixel_scaling) + screen_width / 2);
+	//	point.set(1, 0, (point.get(1, 0) / point.get(3, 0) * pixel_scaling) + screen_height / 2);
 
-		// create circle to display vertex
-		auto circle = std::make_shared<sf::CircleShape>(5);
-		circle->setPosition(point.get(0, 0), point.get(1, 0));
-		circle->setOrigin(5, 5);
-		circle->setFillColor(sf::Color::White);
+	//	// create circle to display vertex
+	//	auto circle = std::make_shared<sf::CircleShape>(5);
+	//	circle->setPosition(point.get(0, 0), point.get(1, 0));
+	//	circle->setOrigin(5, 5);
+	//	circle->setFillColor(sf::Color::White);
 
-		objects.push(render_object(circle, transformed.get(2, 0),
-					   PRIORITIES::POINT));
-	}
+	//	objects.push(render_object(circle, transformed.get(2, 0),
+	//				   PRIORITIES::POINT));
+	//}
 
 	// faces
 	for (auto const &face : faces_) {
