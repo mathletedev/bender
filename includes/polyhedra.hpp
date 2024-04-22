@@ -7,5 +7,5 @@ namespace polyhedra {
 	solid make_tetrahedron(camera *camera);
 	solid make_cube(camera *camera);
 	solid make_octahedron(camera *camera);
-	solid make_icosaedron(camera *camera);
+	solid make_icosahedron(camera *camera);
 } // namespace polyhedra
