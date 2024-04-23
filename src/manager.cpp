@@ -82,17 +82,16 @@ void manager::process_input()
 	double screen_width = 1000, screen_height = 1000;
 	sf::Vector2i origin(screen_width / 2, screen_height / 2);
 
-	matrix camera_dir = camera_.transform.to_matrix();
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
 		// hide mouse
 		window_.setMouseCursorVisible(false);
+
 		// find change in mouse position
 		sf::Vector2i delta_position = sf::Mouse::getPosition(window_) - origin;
-		// reset to origin
+		// reset mouse to origin
 		sf::Mouse::setPosition(origin, window_);
-		
-		std::cout << delta_position.x << " " << delta_position.y << std::endl;
 
+		// change camera rotation
 		camera_.transform.rotation.y += delta_position.x / screen_width;
 		camera_.transform.rotation.x -= delta_position.y / screen_height;
 
@@ -116,7 +115,6 @@ void manager::process_input()
 			this->camera_.transform.position.y += camera_.get_camera_speed();
 		}
 	}
-	//std::cout << camera_.transform.position.x << " " << camera_.transform.position.y << " " << camera_.transform.position.z << " " << std::endl;
 }
 
 // puts solids into objects queue
