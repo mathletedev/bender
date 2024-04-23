@@ -5,6 +5,15 @@ camera::camera() {
 	aspect_ratio_ = 1000.0/1000.0;
 	near_ = 0.001;
 	far_ = 100.0;
+	camera_speed_ = .001;
+}
+
+float camera::get_camera_speed() const {
+	return camera_speed_;
+}
+
+void camera::set_camera_speed(double const& new_speed) {
+	camera_speed_ = new_speed;
 }
 
 matrix camera::get_projection_matrix() const {

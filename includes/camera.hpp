@@ -11,10 +11,16 @@ class camera {
 		camera();
 		class transform transform;
 
+		float get_camera_speed() const;
+		void set_camera_speed(double const &new_speed);
+
 		matrix get_projection_matrix() const;
 	private:
+		// camera movement
+		float camera_speed_;
+
+		// setup for projection
+		float near_, far_;
 		float aspect_ratio_;
 		float fov_;
-		// setup for frustrum
-		float near_, far_;
 };

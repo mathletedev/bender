@@ -66,12 +66,42 @@ void manager::update() {
 		solid.transform.rotation.x += 0.05;
 	}
 
+	process_input();
+
 	window_.clear();
 
 	process_solids();
 	render_all();
 
 	window_.display();
+}
+
+void manager::process_input()
+{
+	matrix camera_dir = camera_.transform.to_matrix();
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+		// gain access to movement
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+			this->camera_.transform.position.z += camera_.get_camera_speed();
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+			this->camera_.transform.position.z -= camera_.get_camera_speed();
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+			this->camera_.transform.position.x += camera_.get_camera_speed();
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+			this->camera_.transform.position.x -= camera_.get_camera_speed();
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+			this->camera_.transform.position.y += camera_.get_camera_speed();
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
+			this->camera_.transform.position.y -= camera_.get_camera_speed();
+		}
+	}
+	std::cout << camera_.transform.position.x << " " << camera_.transform.position.y << " " << camera_.transform.position.z << " " << std::endl;
+	std::cout << "\t" << camera_dir.get(0, 0) << " " << camera_dir.get(1, 0) << " " << camera_dir.get(2, 0) << " " << std::endl;
 }
 
 // puts solids into objects queue

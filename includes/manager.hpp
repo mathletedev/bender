@@ -17,6 +17,7 @@ class manager {
 
 		void run();
 		void update();
+		void process_input();
 		void process_solids();
 		void render_all();
 

@@ -1,7 +1,8 @@
 #include "manager.hpp"
 
-class Test {
-  public:
-    void testTransform();
-  private:
-}
+class test {
+	public:
+		void test_transform();
+
+	private:
+};
