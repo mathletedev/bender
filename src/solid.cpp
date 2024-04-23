@@ -27,6 +27,7 @@ void solid::render_into(std::priority_queue<render_object> &objects) const {
 	// height/width used to offset the pixels to the center (screen starts (0,0) at top left)
 	// pixel_scaling used to scale the projection to proper size
 	double screen_width = 1000, screen_height = 1000, pixel_scaling = 500;
+	float r_change = 0, g_change = 0, b_change = 0; 
 
 	// store projected points
 	std::vector<matrix> proj_points;
@@ -82,6 +83,7 @@ void solid::render_into(std::priority_queue<render_object> &objects) const {
 		double min_z = std::numeric_limits<double>::max();
 
 		for (int i = 0; i < face.size(); ++i) {
+
 			matrix point = proj_points[face[i]];
 
 			zs[i] = point.get(3, 0);
@@ -92,39 +94,68 @@ void solid::render_into(std::priority_queue<render_object> &objects) const {
 
 			convex->setPoint(i, {(float)point.get(0, 0),
 					     (float)point.get(1, 0)});
+			float z_curr = zs[i];
+			r_change = (z_curr * 50);
+			r_change -= 20; 
+			g_change = r_change, b_change = r_change;
+			if (color_.r - r_change < 0) {
+				if (color_.r > 128) {
+					r_change = 0;
+				} else {
+					r_change = 255 - color_.r; 
+				}
+			}
+			if (color_.g - g_change < 0) {
+				if (color_.g > 128) {
+					g_change = 0;
+				} else {
+					g_change = 255 - color_.r;
+				}
+			}
+			if (color_.b - b_change < 0) {
+				if (color_.b > 128) {
+					b_change = 0;
+				} else {
+					b_change = 255 - color_.b;
+				}
+			}
+			//convex->setFillColor(sf::Color(color_.r + r_change,
+						      // color_.b + b_change,
+						      // color_.g + g_change));
 		}
-
-		// convex->setFillColor(
-		// sf::Color(rand() % 255, rand() % 255, rand() % 255));
-		convex->setFillColor(color_);
-
-		objects.push(render_object(convex, min_z, PRIORITIES::PLANE));
+		convex->setFillColor(sf::Color(color_.r - r_change,
+					color_.g - g_change,
+					color_.b - b_change));
+		//convex->setFillColor(
+		//sf::Color(rand() % 255, rand() % 255, rand() % 255));
+		objects.push(render_object(convex, min_z,
+		PRIORITIES::PLANE));
 
 		// edges
-		for (int i = 0; i <= face.size(); ++i) {
-			sf::Vector2f point1 = points[i % face.size()];
-			sf::Vector2f point2 = points[(i + 1) % face.size()];
+		//for (int i = 0; i <= face.size(); ++i) {
+		//	sf::Vector2f point1 = points[i % face.size()];
+		//	sf::Vector2f point2 = points[(i + 1) % face.size()];
 
-			double length = utils::distance(point1, point2);
-			double angle = utils::angle(point1, point2);
+		//	double length = utils::distance(point1, point2);
+		//	double angle = utils::angle(point1, point2);
 
-			// no line shape, so rotate a rectangle
-			auto line = std::make_shared<sf::RectangleShape>(
-			    sf::Vector2f(length, 4));
-			line->rotate(angle * 180 / M_PI);
-			line->setPosition(point1);
-			line->setOrigin(0, 2);
-			if (color_ == sf::Color::White) {
-				line->setFillColor(sf::Color(128, 128, 128)); 
-			} else {
-				line->setFillColor(sf::Color::White);
-			}
+		//	// no line shape, so rotate a rectangle
+		//	auto line = std::make_shared<sf::RectangleShape>(
+		//	    sf::Vector2f(length, 4));
+		//	line->rotate(angle * 180 / M_PI);
+		//	line->setPosition(point1);
+		//	line->setOrigin(0, 2);
+		//	if (color_ == sf::Color::White) {
+		//		line->setFillColor(sf::Color(128, 128, 128)); 
+		//	} else {
+		//		line->setFillColor(sf::Color::White);
+		//	}
 
-			objects.push(
-			    render_object(line,
-					  std::min(zs[i % face.size()],
-						   zs[(i + 1) % face.size()]),
-					  PRIORITIES::LINE));
-		}
+		//	objects.push(
+		//	    render_object(line,
+		//			  std::min(zs[i % face.size()],
+		//				   zs[(i + 1) % face.size()]),
+		//			  PRIORITIES::LINE));
+		//}
 	}
 }

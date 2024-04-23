@@ -14,7 +14,7 @@ manager::manager() {
 	std::string path = "./data/monkey.obj";
 	import_obj obj_importer;
 	solid monke = obj_importer.import_file(path, &camera_);
-	monke.set_color(sf::Color::Transparent);
+	monke.set_color(sf::Color::Red);
 	monke.transform.position = {-3, 0, 5};
 
 	solids_.push_back(monke);
