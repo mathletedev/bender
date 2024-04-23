@@ -21,10 +21,12 @@ void solid::add_face(std::vector<int> const &face) {
 
 // convert solid into render_objects and push into queue
 void solid::render_into(std::priority_queue<render_object> &objects) const {
-	// vertices
+	// reference on how it works
+	//https://youtu.be/EqNcqBdrNyI?feature=shared
 
 	double screen_width = 1000, screen_height = 1000, pixel_scaling = 500;
 
+	// store projected points
 	std::vector<matrix> proj_points;
 
 	// project all points
