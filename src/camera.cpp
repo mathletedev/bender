@@ -5,7 +5,7 @@ camera::camera() {
 	aspect_ratio_ = 1000.0/1000.0;
 	near_ = 0.001;
 	far_ = 100.0;
-	camera_speed_ = .001;
+	camera_speed_ = .1;
 }
 
 float camera::get_camera_speed() const {

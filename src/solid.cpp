@@ -24,6 +24,8 @@ void solid::render_into(std::priority_queue<render_object> &objects) const {
 	// reference on how it works
 	//https://youtu.be/EqNcqBdrNyI?feature=shared
 
+	// height/width used to offset the pixels to the center (screen starts (0,0) at top left)
+	// pixel_scaling used to scale the projection to proper size
 	double screen_width = 1000, screen_height = 1000, pixel_scaling = 500;
 
 	// store projected points
@@ -31,8 +33,20 @@ void solid::render_into(std::priority_queue<render_object> &objects) const {
 
 	// project all points
 	for (auto const &vertex : vertices_) {
-		// get x,y,z after transformations
-		matrix transformed = transform.to_matrix() * vertex;
+		// make copy of transform to account of camera_offset
+		class transform transform_cam;
+
+		transform_cam.position.x = transform.position.x - camera_->transform.position.x;
+		transform_cam.position.y = transform.position.y - camera_->transform.position.y;
+		transform_cam.position.z = transform.position.z - camera_->transform.position.z;
+
+		transform_cam.rotation.x = transform.rotation.x - camera_->transform.rotation.x;
+		transform_cam.rotation.y = transform.rotation.y - camera_->transform.rotation.y;
+		transform_cam.rotation.z = transform.rotation.z - camera_->transform.rotation.z;
+
+		transform_cam.scale = transform.scale;
+
+		matrix transformed = transform_cam.to_matrix() * vertex;
 
 		// get projected point
 		matrix point = camera_->get_projection_matrix() * transformed;
