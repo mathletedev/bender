@@ -102,25 +102,20 @@ void solid::render_into(std::priority_queue<render_object> &objects) const {
 			r_change -= 20; 
 			g_change = r_change, b_change = r_change;
 			if (color_.r - r_change < 0) {
-				if (color_.r > 128) {
-					r_change = 0;
-				} else {
-					r_change = 255 - color_.r; 
-				}
+				r_change = 0 - color_.r; 
 			}
 			if (color_.g - g_change < 0) {
-				if (color_.g > 128) {
-					g_change = 0;
-				} else {
-					g_change = 255 - color_.r;
-				}
+				g_change = 0 - color_.g; 
 			}
 			if (color_.b - b_change < 0) {
-				if (color_.b > 128) {
-					b_change = 0;
-				} else {
-					b_change = 255 - color_.b;
-				}
+				b_change = 0 - color_.b; 
+			}
+
+			if ((color_.r + color_.g + color_.b + r_change +
+			     g_change + b_change) < 5) {
+				r_change = color_.r; 
+				g_change = color_.g; 
+				b_change = color_.b; 
 			}
 			//convex->setFillColor(sf::Color(color_.r + r_change,
 						      // color_.b + b_change,
