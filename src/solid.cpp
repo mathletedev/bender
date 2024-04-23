@@ -99,7 +99,10 @@ void solid::render_into(std::priority_queue<render_object> &objects) const {
 					     (float)point.get(1, 0)});
 			float z_curr = zs[i];
 			r_change = (z_curr * (100 - light_intensity));
-			g_change = r_change, b_change = r_change;
+			b_change = g_change = r_change; 
+			r_change *= c_intensity; 
+			g_change *= m_intensity; 
+			b_change *= y_intensity; 
 			if (color_.r - r_change < 0) {
 				r_change = 0 - color_.r; 
 			}
@@ -110,14 +113,14 @@ void solid::render_into(std::priority_queue<render_object> &objects) const {
 				b_change = 0 - color_.b; 
 			}
 
-			//makes sure that objects far enough to be black are just set to black
+			// makes sure that objects far enough to be black are just set to black
+
 			if ((color_.r + color_.g + color_.b + r_change +
-			     g_change + b_change) < 5) {
+			     g_change + b_change) < 20) {
 				r_change = color_.r; 
 				g_change = color_.g; 
 				b_change = color_.b; 
 			}
-
 		}
 		convex->setFillColor(sf::Color(color_.r - r_change,
 					color_.g - g_change,
@@ -147,9 +150,9 @@ void solid::render_into(std::priority_queue<render_object> &objects) const {
 				line->setFillColor(sf::Color::White);
 			}*/
 
-			line->setFillColor(sf::Color(color_.r - r_change + 30,
-					color_.g - g_change + 30,
-					color_.b - b_change + 30));
+			line->setFillColor(sf::Color(color_.r - r_change + 15,
+					color_.g - g_change + 15,
+					color_.b - b_change + 15));
 
 			objects.push(
 			    render_object(line,
