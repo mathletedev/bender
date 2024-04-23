@@ -98,8 +98,7 @@ void solid::render_into(std::priority_queue<render_object> &objects) const {
 			convex->setPoint(i, {(float)point.get(0, 0),
 					     (float)point.get(1, 0)});
 			float z_curr = zs[i];
-			r_change = (z_curr * 50);
-			r_change -= 20; 
+			r_change = (z_curr * (100 - light_intensity));
 			g_change = r_change, b_change = r_change;
 			if (color_.r - r_change < 0) {
 				r_change = 0 - color_.r; 
@@ -117,9 +116,7 @@ void solid::render_into(std::priority_queue<render_object> &objects) const {
 				g_change = color_.g; 
 				b_change = color_.b; 
 			}
-			//convex->setFillColor(sf::Color(color_.r + r_change,
-						      // color_.b + b_change,
-						      // color_.g + g_change));
+
 		}
 		convex->setFillColor(sf::Color(color_.r - r_change,
 					color_.g - g_change,

@@ -19,6 +19,8 @@
 #include <stdexcept>
 #include <vector>
 
+
+
 class solid {
 	public:
 		class transform transform;
@@ -38,4 +40,5 @@ class solid {
 		std::vector<std::vector<int>> faces_;
 		sf::Color color_;
 		camera *camera_;
+		int light_intensity = 70; 
 };
