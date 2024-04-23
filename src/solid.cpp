@@ -110,6 +110,7 @@ void solid::render_into(std::priority_queue<render_object> &objects) const {
 				b_change = 0 - color_.b; 
 			}
 
+			//makes sure that objects far enough to be black are just set to black
 			if ((color_.r + color_.g + color_.b + r_change +
 			     g_change + b_change) < 5) {
 				r_change = color_.r; 
@@ -127,30 +128,34 @@ void solid::render_into(std::priority_queue<render_object> &objects) const {
 		PRIORITIES::PLANE));
 
 		// edges
-		//for (int i = 0; i <= face.size(); ++i) {
-		//	sf::Vector2f point1 = points[i % face.size()];
-		//	sf::Vector2f point2 = points[(i + 1) % face.size()];
+		for (int i = 0; i <= face.size(); ++i) {
+			sf::Vector2f point1 = points[i % face.size()];
+			sf::Vector2f point2 = points[(i + 1) % face.size()];
 
-		//	double length = utils::distance(point1, point2);
-		//	double angle = utils::angle(point1, point2);
+			double length = utils::distance(point1, point2);
+			double angle = utils::angle(point1, point2);
 
-		//	// no line shape, so rotate a rectangle
-		//	auto line = std::make_shared<sf::RectangleShape>(
-		//	    sf::Vector2f(length, 4));
-		//	line->rotate(angle * 180 / M_PI);
-		//	line->setPosition(point1);
-		//	line->setOrigin(0, 2);
-		//	if (color_ == sf::Color::White) {
-		//		line->setFillColor(sf::Color(128, 128, 128)); 
-		//	} else {
-		//		line->setFillColor(sf::Color::White);
-		//	}
+			// no line shape, so rotate a rectangle
+			auto line = std::make_shared<sf::RectangleShape>(
+			    sf::Vector2f(length, 4));
+			line->rotate(angle * 180 / M_PI);
+			line->setPosition(point1);
+			line->setOrigin(0, 2);
+			/*if (color_ == sf::Color::White) {
+				line->setFillColor(sf::Color(128, 128, 128)); 
+			} else {
+				line->setFillColor(sf::Color::White);
+			}*/
 
-		//	objects.push(
-		//	    render_object(line,
-		//			  std::min(zs[i % face.size()],
-		//				   zs[(i + 1) % face.size()]),
-		//			  PRIORITIES::LINE));
-		//}
+			line->setFillColor(sf::Color(color_.r - r_change + 30,
+					color_.g - g_change + 30,
+					color_.b - b_change + 30));
+
+			objects.push(
+			    render_object(line,
+					  std::min(zs[i % face.size()],
+						   zs[(i + 1) % face.size()]),
+					  PRIORITIES::LINE));
+		}
 	}
 }
