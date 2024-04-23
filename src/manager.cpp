@@ -94,10 +94,10 @@ void manager::process_input()
 			this->camera_.transform.position.x -= camera_.get_camera_speed();
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-			this->camera_.transform.position.y += camera_.get_camera_speed();
+			this->camera_.transform.position.y -= camera_.get_camera_speed();
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
-			this->camera_.transform.position.y -= camera_.get_camera_speed();
+			this->camera_.transform.position.y += camera_.get_camera_speed();
 		}
 	}
 	std::cout << camera_.transform.position.x << " " << camera_.transform.position.y << " " << camera_.transform.position.z << " " << std::endl;
