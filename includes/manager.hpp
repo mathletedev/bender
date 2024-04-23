@@ -7,6 +7,7 @@
 #include "solid.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
+#include <SFML/System/Vector2.hpp>
 #include <cstdlib>
 #include <ctime>
 #include <queue>

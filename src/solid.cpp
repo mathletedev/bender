@@ -34,20 +34,23 @@ void solid::render_into(std::priority_queue<render_object> &objects) const {
 
 	// project all points
 	for (auto const &vertex : vertices_) {
-		// make copy of transform to account of camera_offset
-		class transform transform_cam;
 
+		// make copy of transform to account of camera_offset
+		// had to make copy since transform is not a modifiable l-value
+		class transform transform_cam;
 		transform_cam.position.x = transform.position.x - camera_->transform.position.x;
 		transform_cam.position.y = transform.position.y - camera_->transform.position.y;
 		transform_cam.position.z = transform.position.z - camera_->transform.position.z;
-
-		transform_cam.rotation.x = transform.rotation.x - camera_->transform.rotation.x;
-		transform_cam.rotation.y = transform.rotation.y - camera_->transform.rotation.y;
-		transform_cam.rotation.z = transform.rotation.z - camera_->transform.rotation.z;
-
+		transform_cam.rotation = transform.rotation;
 		transform_cam.scale = transform.scale;
 
+		// gets rotation matrix for camera
+		class transform rotation_cam;
+		rotation_cam.rotation = camera_->transform.rotation;
+
 		matrix transformed = transform_cam.to_matrix() * vertex;
+
+		transformed = rotation_cam.to_matrix() * transformed;
 
 		// get projected point
 		matrix point = camera_->get_projection_matrix() * transformed;
