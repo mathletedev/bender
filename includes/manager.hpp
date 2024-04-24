@@ -5,6 +5,7 @@
 #include "polyhedra.hpp"
 #include "renderobject.hpp"
 #include "solid.hpp"
+#include "slider.hpp"
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
