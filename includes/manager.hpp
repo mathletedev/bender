@@ -7,6 +7,7 @@
 #include "solid.hpp"
 #include "slider.hpp"
 #include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/System/Vector2.hpp>
@@ -24,6 +25,7 @@ class manager {
 		void process_solids();
 		void render_all();
 		// void add_axis();
+		void draw_text(); 
 
 	private:
 		double fps_;
@@ -45,4 +47,5 @@ class manager {
 		std::priority_queue<render_object> objects_;
 		sf::Clock fps_clock_;
 		sf::Event event_;
+		sf::Font font;
 };

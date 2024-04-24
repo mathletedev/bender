@@ -51,9 +51,9 @@ void manager::run() {
 	original_g = solids_[total_size].get_color().g;
 	original_b = solids_[total_size].get_color().b;
 
-	sf::Font font;
+	std::string font_path = "./data/Arial.ttf";
 
-	if (!font.loadFromFile("COMICSANS.ttf")) {
+	if (!font.loadFromFile(font_path)) {
 		// error...
 	}
 
@@ -84,6 +84,8 @@ void manager::update() {
 	process_solids();
 
 	//add axis
+
+	draw_text(); 
 
 	render_all();
 
@@ -170,7 +172,7 @@ void manager::process_input()
 		num1_pressed = 0; 
 	}
 
-	//dear neal, this code is the most suspicious you will ever see; its 1 am... (crying emoji)
+	//dear neal, this code is the most suspicious you will ever see; its 1:30 am... (crying emoji)
 	// u could prolly do this with events in like -2 seconds bruh
 
 	//rotate
@@ -188,7 +190,6 @@ void manager::process_input()
 
 	//second time R is pressed down (cancels rotate)
 	if (r_pressed == 2) {
-		
 		//first time X is pressed
 		if (x_pressed == 0) {
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
@@ -258,15 +259,15 @@ void manager::process_input()
 		if (z_pressed == 2) {
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 				if (i == 0) {
-					solids_[total_size].transform.rotation.y += 0.1;
+					solids_[total_size].transform.rotation.z += 0.1;
 				} else {
-					solids_[i - 1].transform.rotation.y += 0.1;
+					solids_[i - 1].transform.rotation.z += 0.1;
 				}
 			} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
 				if (i == 0) {
-					solids_[total_size].transform.rotation.y -= 0.1;
+					solids_[total_size].transform.rotation.z -= 0.1;
 				} else {
-					solids_[i - 1].transform.rotation.y -= 0.1;
+					solids_[i - 1].transform.rotation.z -= 0.1;
 				}
 			}
 		}
@@ -411,18 +412,18 @@ void manager::process_input()
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 				if (i == 0) {
 					solids_[total_size]
-					    .transform.position.y += 0.1;
+					    .transform.position.z += 0.1;
 				} else {
-					solids_[i - 1].transform.position.y +=
+					solids_[i - 1].transform.position.z +=
 					    0.1;
 				}
 			} else if (sf::Keyboard::isKeyPressed(
 				       sf::Keyboard::Down)) {
 				if (i == 0) {
 					solids_[total_size]
-					    .transform.position.y -= 0.1;
+					    .transform.position.z -= 0.1;
 				} else {
-					solids_[i - 1].transform.position.y -=
+					solids_[i - 1].transform.position.z -=
 					    0.1;
 				}
 			}
@@ -568,18 +569,18 @@ void manager::process_input()
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 				if (i == 0) {
 					solids_[total_size]
-					    .transform.scale.y += 0.1;
+					    .transform.scale.z += 0.1;
 				} else {
-					solids_[i - 1].transform.scale.y +=
+					solids_[i - 1].transform.scale.z +=
 					    0.1;
 				}
 			} else if (sf::Keyboard::isKeyPressed(
 				       sf::Keyboard::Down)) {
 				if (i == 0) {
 					solids_[total_size]
-					    .transform.scale.y -= 0.1;
+					    .transform.scale.z -= 0.1;
 				} else {
-					solids_[i - 1].transform.scale.y -=
+					solids_[i - 1].transform.scale.z -=
 					    0.1;
 				}
 			}
@@ -716,3 +717,86 @@ void manager::render_all() {
 //		sf::Vector3f point2(grid_size / 2, 0, i);
 //	}
 // }
+
+void manager::draw_text() {
+
+	sf::Text rotate_text;
+	rotate_text.setFont(font);
+	rotate_text.setCharacterSize(25);
+	rotate_text.setFillColor(sf::Color::White); 
+	rotate_text.setPosition(5, 0); 
+
+
+	if (r_pressed == 2) {
+		rotate_text.setString("rotate is selected");
+	} else {
+		rotate_text.setString("rotate is deselected"); 
+	}
+
+	sf::Text scale_text;
+	scale_text.setFont(font);
+	scale_text.setCharacterSize(25);
+	scale_text.setFillColor(sf::Color::White); 
+	scale_text.setPosition(5, 30); 
+
+	if (s_pressed == 2) {
+		scale_text.setString("scale is selected");
+	} else {
+		scale_text.setString("scale is deselected");
+	}
+
+	sf::Text position_text;
+	position_text.setFont(font);
+	position_text.setCharacterSize(25);
+	position_text.setFillColor(sf::Color::White);
+	position_text.setPosition(5, 60);
+
+	if (g_pressed == 2) {
+		position_text.setString("position is selected");
+	} else {
+		position_text.setString("position is deselected");
+	}
+
+	sf::Text X;
+	X.setFont(font);
+	X.setCharacterSize(50);
+	X.setFillColor(sf::Color::White);
+	X.setPosition(5, 90);
+
+	if (x_pressed == 2) {
+		X.setString("X");
+	} else {
+		X.setString("");
+	}
+
+	sf::Text Y;
+	Y.setFont(font);
+	Y.setCharacterSize(50);
+	Y.setFillColor(sf::Color::White);
+	Y.setPosition(65, 90);
+
+	if (y_pressed == 2) {
+		Y.setString("Y");
+	} else {
+		Y.setString("");
+	}
+
+	sf::Text Z;
+	Z.setFont(font);
+	Z.setCharacterSize(50);
+	Z.setFillColor(sf::Color::White);
+	Z.setPosition(125, 90);
+
+	if (z_pressed == 2) {
+		Z.setString("Z");
+	} else {
+		Z.setString("");
+	}
+
+	window_.draw(rotate_text);
+	window_.draw(scale_text);
+	window_.draw(position_text);
+	window_.draw(X); 
+	window_.draw(Y);
+	window_.draw(Z);
+}

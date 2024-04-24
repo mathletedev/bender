@@ -41,15 +41,27 @@ class solid {
 		std::vector<std::vector<int>> faces_;
 		sf::Color color_;
 		camera *camera_;
-		int light_intensity = 70; 
+		int light_intensity = 30; 
 
 		//cmyk color thingys
 		//if y intensity is set to 1 and c and m are set to 0,
 		//everything will have a yellow tint
 
 		//feel free to play around and make some nice color combos
-		float r_intensity = 128; 
-		float g_intensity = 128; 
-		float b_intensity = 128;
+		//same ratios of red, green, and blue result in the actual color of the objects 
+		//(lower values are darker however)
+		//different ratios result in a tint
+		//float r_intensity = 128; 
+		//float g_intensity = 128; 
+		//float b_intensity = 128;
+		float r_intensity = 113;
+		float g_intensity = 150;
+		float b_intensity = 161;
+		//cool demonstration: randomly find a color you like and its rgb values: 
+		//ex: purple (113, 50, 161)
+		//think of light intensity like alpha (how bright/dark it is)
+		//fiddle around with that and anything which is white should be similar color to
+		//the color that you predetermined!!!!!!!!!!!
+		
 };
 
