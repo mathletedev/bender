@@ -96,23 +96,19 @@ void manager::process_input()
 		camera_.transform.rotation.x -= delta_position.y / screen_height;
 
 		// get direction of camera
-		sf::Vector3f cam_dir;
-		cam_dir.x = -cos(camera_.transform.rotation.x) * sin(camera_.transform.rotation.y);
-		cam_dir.y = -sin(camera_.transform.rotation.x) * cos(camera_.transform.rotation.y);
-		cam_dir.z = cos(camera_.transform.rotation.y) * cos(camera_.transform.rotation.x);
+		//sf::Vector3f cam_dir;
+		//cam_dir.x = -cos(camera_.transform.rotation.x) * sin(camera_.transform.rotation.y);
+		//cam_dir.y = -sin(camera_.transform.rotation.x) * cos(camera_.transform.rotation.y);
+		//cam_dir.z = cos(camera_.transform.rotation.y) * cos(camera_.transform.rotation.x);
 
-		std::cout << cam_dir.x << " " << cam_dir.y << " " << cam_dir.z << std::endl;
+		//std::cout << cam_dir.x << " " << cam_dir.y << " " << cam_dir.z << std::endl;
 
 		// gain access to movement
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-			this->camera_.transform.position.z += cam_dir.z * camera_.get_camera_speed();
-			this->camera_.transform.position.x += cam_dir.x * camera_.get_camera_speed();
-			this->camera_.transform.position.y += cam_dir.y * camera_.get_camera_speed();
+			this->camera_.transform.position.z += camera_.get_camera_speed();
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-			this->camera_.transform.position.z -= cam_dir.z * camera_.get_camera_speed();
-			this->camera_.transform.position.x -= cam_dir.x * camera_.get_camera_speed();
-			this->camera_.transform.position.y -= cam_dir.y * camera_.get_camera_speed();
+			this->camera_.transform.position.z -= camera_.get_camera_speed();
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
 			this->camera_.transform.position.x += camera_.get_camera_speed();
