@@ -40,14 +40,15 @@ class solid {
 		std::vector<std::vector<int>> faces_;
 		sf::Color color_;
 		camera *camera_;
-		int light_intensity = 60; 
+		int light_intensity = 70; 
 
 		//cmyk color thingys
 		//if y intensity is set to 1 and c and m are set to 0,
 		//everything will have a yellow tint
 
 		//feel free to play around and make some nice color combos
-		float c_intensity = 0.4; 
-		float m_intensity = 0.2; 
-		float y_intensity = 1; 
+		float r_intensity = 51; 
+		float g_intensity = 102; 
+		float b_intensity = 255; 
 };
+
