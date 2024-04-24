@@ -26,7 +26,7 @@ manager::manager() {
 	solids_.push_back(tetrahedron);
 
 	solid cube = polyhedra::make_cube(&camera_);
-	cube.set_color(sf::Color::White);
+	cube.set_color(sf::Color::Magenta);
 	cube.transform.position = {0, 0, 5};
 
 	solids_.push_back(cube);
@@ -46,6 +46,11 @@ manager::manager() {
 
 // main loop
 void manager::run() {
+	total_size = solids_.size() - 1;
+	original_r = solids_[4].get_color().r;
+	original_g = solids_[4].get_color().g;
+	original_b = solids_[4].get_color().b;
+
 	while (window_.isOpen()) {
 		while (window_.pollEvent(event_)) {
 			if (event_.type == sf::Event::Closed) window_.close();
@@ -81,6 +86,10 @@ void manager::process_input()
 {
 	double screen_width = 1000, screen_height = 1000;
 	sf::Vector2i origin(screen_width / 2, screen_height / 2);
+	//needs fixing
+	//original_r = solids_[4].get_color().r;
+	//original_g = solids_[4].get_color().g;
+	//original_b = solids_[4].get_color().b;
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
 		// hide mouse
@@ -122,6 +131,45 @@ void manager::process_input()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
 			this->camera_.transform.position.y += camera_.get_camera_speed();
 		}
+	}
+
+	if (pressed == 0) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
+			pressed = 1; 
+			if (i == 0) {
+				solids_[total_size].set_color(sf::Color(
+				    original_r, original_g, original_b));
+			} else {
+				solids_[i - 1].set_color(sf::Color(
+				    original_r, original_g, original_b));
+			}
+
+			original_r = solids_[i].get_color().r;
+			original_g = solids_[i].get_color().g;
+			original_b = solids_[i].get_color().b;
+
+			// if (i == total_size) {
+			//	original_r = solids_[0].get_color().r;
+			//	original_g = solids_[0].get_color().g;
+			//	original_b = solids_[0].get_color().b;
+			// } else {
+			//	original_r = solids_[i + 1].get_color().r;
+			//	original_g = solids_[i + 1].get_color().g;
+			//	original_b = solids_[i + 1].get_color().b;
+			// }
+
+			solids_[i].set_color(sf::Color::White);
+
+			i++;
+
+			if (i > total_size) {
+				i = 0;
+			}
+		}
+	}
+
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
+		pressed = 0; 
 	}
 }
 

@@ -28,6 +28,7 @@ class solid {
 		solid(camera *const &camera);
 
 		void set_color(sf::Color const &color);
+		sf::Color get_color();
 
 		void add_vertex(sf::Vector3f const &vertex);
 		void add_face(std::vector<int> const &face);
@@ -47,8 +48,8 @@ class solid {
 		//everything will have a yellow tint
 
 		//feel free to play around and make some nice color combos
-		float r_intensity = 51; 
-		float g_intensity = 102; 
-		float b_intensity = 255; 
+		float r_intensity = 128; 
+		float g_intensity = 128; 
+		float b_intensity = 128;
 };
 

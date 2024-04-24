@@ -24,6 +24,8 @@ class manager {
 
 	private:
 		double fps_;
+		int i = 0, total_size, pressed = 0;
+		float original_r = 0, original_g = 0, original_b = 0; 
 		sf::RenderWindow window_;
 		camera camera_;
 		std::vector<solid> solids_;
