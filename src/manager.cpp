@@ -47,9 +47,9 @@ manager::manager() {
 // main loop
 void manager::run() {
 	total_size = solids_.size() - 1;
-	original_r = solids_[4].get_color().r;
-	original_g = solids_[4].get_color().g;
-	original_b = solids_[4].get_color().b;
+	original_r = solids_[total_size].get_color().r;
+	original_g = solids_[total_size].get_color().g;
+	original_b = solids_[total_size].get_color().b;
 
 	while (window_.isOpen()) {
 		while (window_.pollEvent(event_)) {
@@ -147,16 +147,6 @@ void manager::process_input()
 			original_r = solids_[i].get_color().r;
 			original_g = solids_[i].get_color().g;
 			original_b = solids_[i].get_color().b;
-
-			// if (i == total_size) {
-			//	original_r = solids_[0].get_color().r;
-			//	original_g = solids_[0].get_color().g;
-			//	original_b = solids_[0].get_color().b;
-			// } else {
-			//	original_r = solids_[i + 1].get_color().r;
-			//	original_g = solids_[i + 1].get_color().g;
-			//	original_b = solids_[i + 1].get_color().b;
-			// }
 
 			solids_[i].set_color(sf::Color::White);
 
