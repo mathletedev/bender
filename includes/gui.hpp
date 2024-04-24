@@ -8,16 +8,16 @@
 
 class gui {
 	public:
-		gui(sf::Vector2f &pos, double &width = 0, double &height = 0) {
+		gui(sf::RenderWindow *window, sf::Vector2f const &pos, sf::Vector2f const &dim) {
 			this->pos_ = pos;
-			this->height_ = height;
-			this->width_ = width;
+			this->dim_ = dim;
+			this->window_ = window;
 		};
 
-		virtual void draw_gui(sf::RenderWindow &window) = 0;
+		virtual void update(sf::Vector2i &mouse_pos) = 0;
 
 	protected:
-		sf::RenderWindow window_;
-		sf::Vector2f pos_;
-		double width_, height_;
+		virtual void draw_gui() = 0;
+		sf::RenderWindow *window_;
+		sf::Vector2f pos_, dim_;
 };

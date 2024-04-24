@@ -178,6 +178,18 @@ void manager::render_all() {
 		window_.draw(objects_.top());
 		objects_.pop();
 	}
+
+	sf::Vector2i mouse_pos;
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+		mouse_pos = sf::Mouse::getPosition(window_);
+	}
+
+	// render gui
+	slider test_slider(&window_, sf::Vector2f(790, 10), sf::Color::White,
+			   sf::Color::Red, sf::Vector2f(200, 20), 0, 1, .5);
+
+	test_slider.update(mouse_pos);
 }
 
 //// adds axis into
