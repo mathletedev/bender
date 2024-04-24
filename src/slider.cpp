@@ -1,9 +1,6 @@
 #include "slider.hpp"
 
 void slider::update(sf::Vector2i &mouse_pos) {
-
-	std::cout << mouse_pos.x << " " << mouse_pos.y << std::endl;
-
 	if (mouse_pos.x >= slider_pos_.x &&
 	    mouse_pos.x <= slider_pos_.x + dim_.y &&
 	    mouse_pos.y >= slider_pos_.y &&
@@ -12,8 +9,6 @@ void slider::update(sf::Vector2i &mouse_pos) {
 			slider_pos_.x = mouse_pos.x;
 		}
 	}
-
-	std::cout << "    " << slider_pos_.x << " " << slider_pos_.y << std::endl;
 	draw_gui();
 }
 
