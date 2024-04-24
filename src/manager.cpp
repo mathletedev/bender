@@ -94,7 +94,7 @@ void manager::process_input()
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
 		// hide mouse
-		window_.setMouseCursorVisible(false);
+		//window_.setMouseCursorVisible(false);
 
 		// find change in mouse position
 		sf::Vector2i delta_position = sf::Mouse::getPosition(window_) - origin;
