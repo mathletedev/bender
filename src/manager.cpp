@@ -71,6 +71,7 @@ void manager::update() {
 	window_.clear();
 
 	process_solids();
+	add_axis();
 
 	render_all();
 
@@ -136,5 +137,56 @@ void manager::render_all() {
 	while (!objects_.empty()) {
 		window_.draw(objects_.top());
 		objects_.pop();
+	}
+}
+
+// adds axis into 
+void manager::add_axis() {
+	// half of total size, 5x5 grid
+	int grid_size = 10;
+	int grid_distance = 1;
+
+	// x axis lines
+	for (int i = -grid_size / 2; i < grid_size / 2; i++) {
+		sf::Vector3f point1_3d(i, 0, -grid_size / 2);
+		sf::Vector3f point2_3d(i, 0, grid_size / 2);
+
+		sf::Vector2f point1_2d, point2_2d;
+		
+		// gets rotation matrix for camera
+		class transform cam_rotation;
+		cam_rotation.rotation = camera_.transform.rotation;
+
+		// project point
+		matrix point_proj_1 = camera_.get_projection_matrix() * (cam_rotation.to_matrix() * point1_3d);
+		matrix point_proj_2 = camera_.get_projection_matrix() * (cam_rotation.to_matrix() * point2_3d);
+
+		// set points to vector2f
+		point1_2d.x = point_proj_1.get(0, 0);
+		point1_2d.y = point_proj_1.get(1, 0);
+		point2_2d.x = point_proj_2.get(0, 0);
+		point2_2d.y = point_proj_2.get(1, 0);
+
+		double length = utils::distance(point1_2d, point2_2d);
+		double angle = utils::angle(point1_2d, point2_2d);
+
+		// no line shape, so rotate a rectangle
+		auto line = std::make_shared<sf::RectangleShape>(
+		    sf::Vector2f(length, 4));
+		line->rotate(angle * 180 / M_PI);
+		line->setPosition(point1_2d);
+		line->setOrigin(0, 2);
+
+		line->setFillColor(sf::Color::White);
+
+		objects_.push(render_object(
+		    line,
+		    0,
+		    PRIORITIES::LINE));
+	}
+
+	for (int i = -grid_size / 2; i < grid_size / 2; i++) {
+		sf::Vector3f point1(-grid_size / 2, 0, i);
+		sf::Vector3f point2(grid_size / 2, 0, i);
 	}
 }
