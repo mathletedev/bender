@@ -19,8 +19,6 @@
 #include <stdexcept>
 #include <vector>
 
-
-
 class solid {
 	public:
 		class transform transform;
@@ -54,13 +52,13 @@ class solid {
 		//float r_intensity = 128; 
 		//float g_intensity = 128; 
 		//float b_intensity = 128;
-		float r_intensity = 113;
-		float g_intensity = 150;
-		float b_intensity = 161;
+		float r_intensity = 128;
+		float g_intensity = 128;
+		float b_intensity = 128;
 		//cool demonstration: randomly find a color you like and its rgb values: 
 		//ex: purple (113, 50, 161)
 		//think of light intensity like alpha (how bright/dark it is)
-		//fiddle around with that and anything which is white should be similar color to
+		//fiddle around with that and anything which is white should be tinted to
 		//the color that you predetermined!!!!!!!!!!!
 		
 };

@@ -85,9 +85,9 @@ void manager::update() {
 
 	// add axis
 
-	draw_text();
-
 	render_all();
+
+	draw_text();
 
 	window_.display();
 }
