@@ -2,7 +2,7 @@
 
 void slider::update(sf::Vector2i &mouse_pos) {
 
-	std::cout << mouse_pos.x << " " << mouse_pos.y << std::endl;
+	// std::cout << mouse_pos.x << " " << mouse_pos.y << std::endl;
 
 	if (mouse_pos.x >= slider_pos_.x &&
 	    mouse_pos.x <= slider_pos_.x + dim_.y &&
@@ -13,7 +13,8 @@ void slider::update(sf::Vector2i &mouse_pos) {
 		}
 	}
 
-	std::cout << "    " << slider_pos_.x << " " << slider_pos_.y << std::endl;
+	// std::cout << "    " << slider_pos_.x << " " << slider_pos_.y <<
+	// std::endl;
 	draw_gui();
 }
 
@@ -27,14 +28,15 @@ void slider::draw_gui() {
 	slider.setPosition(slider_pos_);
 	slider.setSize(sf::Vector2f(dim_.y, dim_.y));
 	slider.setFillColor(slider_color_);
-	
+
 	window_->draw(bg);
 	window_->draw(slider);
 }
 
 // finds coordinates for slider based on current val
 sf::Vector2f slider::to_coord() {
-	return sf::Vector2f((dim_.x * (curr_val_ / max_val_)) - (dim_.y / 2) + pos_.x, pos_.y);
+	return sf::Vector2f(
+	    (dim_.x * (curr_val_ / max_val_)) - (dim_.y / 2) + pos_.x, pos_.y);
 }
 
 // finds value based on current position

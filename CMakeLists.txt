@@ -52,5 +52,6 @@ else()
 	add_custom_command(
 		TARGET ${EXEC} POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy "../data/monkey.obj" "./data/monkey.obj"
+		COMMAND ${CMAKE_COMMAND} -E copy "../data/Arial.ttf" "./data/Arial.ttf"
 	)
 endif()
