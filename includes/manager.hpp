@@ -5,6 +5,7 @@
 #include "polyhedra.hpp"
 #include "renderobject.hpp"
 #include "solid.hpp"
+#include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/System/Vector2.hpp>
@@ -25,8 +26,9 @@ class manager {
 
 	private:
 		double fps_;
-		int i = 0, total_size, num1_pressed = 0, 
-			r_pressed = 0, g_pressed = 0, s_pressed = 0;
+		int i = 0, total_size, num1_pressed = 0,
+			r_pressed = 0, g_pressed = 0, s_pressed = 0, 
+			x_pressed = 0, y_pressed = 0, z_pressed = 0; 
 		float original_r = 0, original_g = 0, original_b = 0; 
 		sf::RenderWindow window_;
 		camera camera_;

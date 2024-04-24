@@ -51,6 +51,12 @@ void manager::run() {
 	original_g = solids_[total_size].get_color().g;
 	original_b = solids_[total_size].get_color().b;
 
+	sf::Font font;
+
+	if (!font.loadFromFile("COMICSANS.ttf")) {
+		// error...
+	}
+
 	while (window_.isOpen()) {
 		while (window_.pollEvent(event_)) {
 			if (event_.type == sf::Event::Closed) window_.close();
@@ -67,8 +73,8 @@ void manager::run() {
 void manager::update() {
 	// rotates all solids
 	for (auto &solid : solids_)	{	
-		solid.transform.rotation.y += 0.05;
-		solid.transform.rotation.x += 0.05;
+		//solid.transform.rotation.y += 0.05;
+		//solid.transform.rotation.x += 0.05;
 	}
 
 	process_input();
@@ -164,6 +170,464 @@ void manager::process_input()
 		num1_pressed = 0; 
 	}
 
+	//dear neal, this code is the most suspicious you will ever see; its 1 am... (crying emoji)
+	// u could prolly do this with events in like -2 seconds bruh
+
+	//rotate
+	//first time R is pressed down
+	if (r_pressed == 0) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+			r_pressed = 1;
+		}
+	}
+	if (r_pressed == 1) {
+		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+			r_pressed = 2;
+		}
+	}
+
+	//second time R is pressed down (cancels rotate)
+	if (r_pressed == 2) {
+		
+		//first time X is pressed
+		if (x_pressed == 0) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
+				x_pressed = 1;
+			}
+		}
+		if (x_pressed == 1) {
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
+				x_pressed = 2;
+			}
+		}
+		//first time Y is pressed
+		if (y_pressed == 0) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
+				y_pressed = 1;
+			}
+		}
+		if (y_pressed == 1) {
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
+				y_pressed = 2;
+			}
+		}
+		//first time Z is pressed
+		if (z_pressed == 0) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+				z_pressed = 1;
+			}
+		}
+		if (z_pressed == 1) {
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+				z_pressed = 2;
+			}
+		}
+
+		if (x_pressed == 2) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+				if (i == 0) {
+					solids_[total_size].transform.rotation.x += 0.1;
+				} else {
+					solids_[i - 1].transform.rotation.x += 0.1;
+				}
+			} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+				if (i == 0) {
+					solids_[total_size].transform.rotation.x -= 0.1;
+				} else {
+					solids_[i - 1].transform.rotation.x -= 0.1; 
+				}
+			}
+		}
+
+		if (y_pressed == 2) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+				if (i == 0) {
+					solids_[total_size].transform.rotation.y += 0.1;
+				} else {
+					solids_[i - 1].transform.rotation.y += 0.1;
+				}
+			} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+				if (i == 0) {
+					solids_[total_size].transform.rotation.y -= 0.1;
+				} else {
+					solids_[i - 1].transform.rotation.y -= 0.1;
+				}
+			}
+		}
+
+		if (z_pressed == 2) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+				if (i == 0) {
+					solids_[total_size].transform.rotation.y += 0.1;
+				} else {
+					solids_[i - 1].transform.rotation.y += 0.1;
+				}
+			} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+				if (i == 0) {
+					solids_[total_size].transform.rotation.y -= 0.1;
+				} else {
+					solids_[i - 1].transform.rotation.y -= 0.1;
+				}
+			}
+		}
+		
+		// second time X is pressed
+		if (x_pressed == 2) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
+				x_pressed = 3;
+			}
+		}
+		if (x_pressed == 3) {
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
+				x_pressed = 0;
+			}
+		}
+		// second time Y is pressed
+		if (y_pressed == 2) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
+				y_pressed = 3;
+			}
+		}
+		if (y_pressed == 3) {
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
+				y_pressed = 0;
+			}
+		}
+		// second time Z is pressed
+		if (z_pressed == 2) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+				z_pressed = 3;
+			}
+		}
+		if (z_pressed == 3) {
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+				z_pressed = 0;
+			}
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+			r_pressed = 3;
+		}
+	}
+	if (r_pressed == 3) {
+		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+			r_pressed = 0;
+		}
+	}
+
+	//moving
+	// first time g is pressed down
+	if (g_pressed == 0) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::G)) {
+			g_pressed = 1;
+		}
+	}
+	if (g_pressed == 1) {
+		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::G)) {
+			g_pressed = 2;
+		}
+	}
+
+	// second time g is pressed down (cancels moving)
+	if (g_pressed == 2) {
+
+		// first time X is pressed
+		if (x_pressed == 0) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
+				x_pressed = 1;
+			}
+		}
+		if (x_pressed == 1) {
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
+				x_pressed = 2;
+			}
+		}
+		// first time Y is pressed
+		if (y_pressed == 0) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
+				y_pressed = 1;
+			}
+		}
+		if (y_pressed == 1) {
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
+				y_pressed = 2;
+			}
+		}
+		// first time Z is pressed
+		if (z_pressed == 0) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+				z_pressed = 1;
+			}
+		}
+		if (z_pressed == 1) {
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+				z_pressed = 2;
+			}
+		}
+
+		if (x_pressed == 2) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+				if (i == 0) {
+					solids_[total_size]
+					    .transform.position.x += 0.1;
+				} else {
+					solids_[i - 1].transform.position.x +=
+					    0.1;
+				}
+			} else if (sf::Keyboard::isKeyPressed(
+				       sf::Keyboard::Down)) {
+				if (i == 0) {
+					solids_[total_size]
+					    .transform.position.x -= 0.1;
+				} else {
+					solids_[i - 1].transform.position.x -=
+					    0.1;
+				}
+			}
+		}
+
+		if (y_pressed == 2) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+				if (i == 0) {
+					solids_[total_size]
+					    .transform.position.y += 0.1;
+				} else {
+					solids_[i - 1].transform.position.y +=
+					    0.1;
+				}
+			} else if (sf::Keyboard::isKeyPressed(
+				       sf::Keyboard::Down)) {
+				if (i == 0) {
+					solids_[total_size]
+					    .transform.position.y -= 0.1;
+				} else {
+					solids_[i - 1].transform.position.y -=
+					    0.1;
+				}
+			}
+		}
+
+		if (z_pressed == 2) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+				if (i == 0) {
+					solids_[total_size]
+					    .transform.position.y += 0.1;
+				} else {
+					solids_[i - 1].transform.position.y +=
+					    0.1;
+				}
+			} else if (sf::Keyboard::isKeyPressed(
+				       sf::Keyboard::Down)) {
+				if (i == 0) {
+					solids_[total_size]
+					    .transform.position.y -= 0.1;
+				} else {
+					solids_[i - 1].transform.position.y -=
+					    0.1;
+				}
+			}
+		}
+
+		// second time X is pressed
+		if (x_pressed == 2) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
+				x_pressed = 3;
+			}
+		}
+		if (x_pressed == 3) {
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
+				x_pressed = 0;
+			}
+		}
+		// second time Y is pressed
+		if (y_pressed == 2) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
+				y_pressed = 3;
+			}
+		}
+		if (y_pressed == 3) {
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
+				y_pressed = 0;
+			}
+		}
+		// second time Z is pressed
+		if (z_pressed == 2) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+				z_pressed = 3;
+			}
+		}
+		if (z_pressed == 3) {
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+				z_pressed = 0;
+			}
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::G)) {
+			g_pressed = 3;
+		}
+	}
+	if (g_pressed == 3) {
+		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::G)) {
+			g_pressed = 0;
+		}
+	}
+
+	// scaling
+	//  first time s is pressed down
+	if (s_pressed == 0) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+			s_pressed = 1;
+		}
+	}
+	if (s_pressed == 1) {
+		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+			s_pressed = 2;
+		}
+	}
+
+	// second time s is pressed down (cancels moving)
+	if (s_pressed == 2) {
+
+		// first time X is pressed
+		if (x_pressed == 0) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
+				x_pressed = 1;
+			}
+		}
+		if (x_pressed == 1) {
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
+				x_pressed = 2;
+			}
+		}
+		// first time Y is pressed
+		if (y_pressed == 0) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
+				y_pressed = 1;
+			}
+		}
+		if (y_pressed == 1) {
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
+				y_pressed = 2;
+			}
+		}
+		// first time Z is pressed
+		if (z_pressed == 0) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+				z_pressed = 1;
+			}
+		}
+		if (z_pressed == 1) {
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+				z_pressed = 2;
+			}
+		}
+
+		if (x_pressed == 2) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+				if (i == 0) {
+					solids_[total_size]
+					    .transform.scale.x += 0.1;
+				} else {
+					solids_[i - 1].transform.scale.x +=
+					    0.1;
+				}
+			} else if (sf::Keyboard::isKeyPressed(
+				       sf::Keyboard::Down)) {
+				if (i == 0) {
+					solids_[total_size]
+					    .transform.scale.x -= 0.1;
+				} else {
+					solids_[i - 1].transform.scale.x -=
+					    0.1;
+				}
+			}
+		}
+
+		if (y_pressed == 2) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+				if (i == 0) {
+					solids_[total_size]
+					    .transform.scale.y += 0.1;
+				} else {
+					solids_[i - 1].transform.scale.y +=
+					    0.1;
+				}
+			} else if (sf::Keyboard::isKeyPressed(
+				       sf::Keyboard::Down)) {
+				if (i == 0) {
+					solids_[total_size]
+					    .transform.scale.y -= 0.1;
+				} else {
+					solids_[i - 1].transform.scale.y -=
+					    0.1;
+				}
+			}
+		}
+
+		if (z_pressed == 2) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+				if (i == 0) {
+					solids_[total_size]
+					    .transform.scale.y += 0.1;
+				} else {
+					solids_[i - 1].transform.scale.y +=
+					    0.1;
+				}
+			} else if (sf::Keyboard::isKeyPressed(
+				       sf::Keyboard::Down)) {
+				if (i == 0) {
+					solids_[total_size]
+					    .transform.scale.y -= 0.1;
+				} else {
+					solids_[i - 1].transform.scale.y -=
+					    0.1;
+				}
+			}
+		}
+
+		// second time X is pressed
+		if (x_pressed == 2) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
+				x_pressed = 3;
+			}
+		}
+		if (x_pressed == 3) {
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
+				x_pressed = 0;
+			}
+		}
+		// second time Y is pressed
+		if (y_pressed == 2) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
+				y_pressed = 3;
+			}
+		}
+		if (y_pressed == 3) {
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
+				y_pressed = 0;
+			}
+		}
+		// second time Z is pressed
+		if (z_pressed == 2) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+				z_pressed = 3;
+			}
+		}
+		if (z_pressed == 3) {
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+				z_pressed = 0;
+			}
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+			s_pressed = 3;
+		}
+	}
+	if (s_pressed == 3) {
+		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+			s_pressed = 0;
+		}
+	}
 }
 
 // puts solids into objects queue
