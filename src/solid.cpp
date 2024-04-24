@@ -8,6 +8,10 @@ void solid::set_color(sf::Color const &color) {
 	color_ = color;
 }
 
+sf::Color solid::get_color() {
+	return color_; 
+}
+
 void solid::add_vertex(sf::Vector3f const &vertex) {
 	vertices_.push_back(vertex);
 }
