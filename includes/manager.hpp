@@ -21,11 +21,12 @@ class manager {
 		void process_input();
 		void process_solids();
 		void render_all();
-		//void add_axis();
+		// void add_axis();
 
 	private:
 		double fps_;
-		int i = 0, total_size, pressed = 0;
+		int i = 0, total_size, num1_pressed = 0, 
+			r_pressed = 0, g_pressed = 0, s_pressed = 0;
 		float original_r = 0, original_g = 0, original_b = 0; 
 		sf::RenderWindow window_;
 		camera camera_;

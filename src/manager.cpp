@@ -76,7 +76,6 @@ void manager::update() {
 	window_.clear();
 
 	process_solids();
-	//add_axis();
 
 	render_all();
 
@@ -134,9 +133,9 @@ void manager::process_input()
 		}
 	}
 
-	if (pressed == 0) {
+	if (num1_pressed == 0) {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
-			pressed = 1; 
+			num1_pressed = 1; 
 			if (i == 0) {
 				solids_[total_size].set_color(sf::Color(
 				    original_r, original_g, original_b));
@@ -160,8 +159,9 @@ void manager::process_input()
 	}
 
 	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
-		pressed = 0; 
+		num1_pressed = 0; 
 	}
+
 }
 
 // puts solids into objects queue
@@ -178,8 +178,8 @@ void manager::render_all() {
 	}
 }
 
-//// adds axis into 
-//void manager::add_axis() {
+//// adds axis into
+// void manager::add_axis() {
 //	// half of total size, 5x5 grid
 //	int grid_size = 10;
 //	int grid_distance = 1;
@@ -192,14 +192,15 @@ void manager::render_all() {
 //		sf::Vector3f point2_3d(i, 0, grid_size / 2);
 //
 //		sf::Vector2f point1_2d, point2_2d;
-//		
+//
 //		// gets rotation matrix for camera
 //		class transform cam_rotation;
 //		cam_rotation.rotation = camera_.transform.rotation;
 //
 //		// project point
-//		matrix point_proj_1 = camera_.get_projection_matrix() * (cam_rotation.to_matrix() * point1_3d);
-//		matrix point_proj_2 = camera_.get_projection_matrix() * (cam_rotation.to_matrix() * point2_3d);
+//		matrix point_proj_1 = camera_.get_projection_matrix() *
+//(cam_rotation.to_matrix() * point1_3d); 		matrix point_proj_2 =
+//camera_.get_projection_matrix() * (cam_rotation.to_matrix() * point2_3d);
 //
 //		// perpspective divide
 //		point_proj_1.set(0, 0,
@@ -236,4 +237,4 @@ void manager::render_all() {
 //		sf::Vector3f point1(-grid_size / 2, 0, i);
 //		sf::Vector3f point2(grid_size / 2, 0, i);
 //	}
-//}
+// }
