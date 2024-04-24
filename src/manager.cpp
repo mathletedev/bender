@@ -77,6 +77,8 @@ void manager::update() {
 
 	process_solids();
 
+	//add axis
+
 	render_all();
 
 	window_.display();
