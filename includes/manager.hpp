@@ -21,7 +21,7 @@ class manager {
 		void process_input();
 		void process_solids();
 		void render_all();
-		void add_axis();
+		//void add_axis();
 
 	private:
 		double fps_;
