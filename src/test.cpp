@@ -58,7 +58,7 @@ void test::test_rotation() {
 	sf::Vector3f vertex(1,1,1);
 	testData.rotation = sf::Vector3f(90,0,0);
 	matrix testMatrix = testData.to_matrix() * vertex;
-	if (testMatrix.get(0,0) == 1 && testMatrix.get(1,0) == -1 && testMatrix.get(2,0) == 1) {
+	if (testMatrix.get(0,0) == 1 && testMatrix.get(1,0) == 1 && testMatrix.get(2,0) == -1) {
 		std::cout << "Test rotation passed!" << std::endl;
 	}
 	else {
