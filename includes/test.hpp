@@ -1,4 +1,5 @@
-#include "manager.hpp"
+#include "matrix.hpp"
+#include "transform.hpp"
 
 class test {
 	public:
