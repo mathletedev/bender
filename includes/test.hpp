@@ -1,5 +1,10 @@
+#pragma once
+
+#define _USE_MATH_DEFINES
+
 #include "matrix.hpp"
 #include "transform.hpp"
+#include <cmath>
 
 class test {
 	public:
