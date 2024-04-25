@@ -78,3 +78,13 @@ transform testData;
 		std::cout << "Test scale failed!" << std::endl;
 	}
 }
+
+void test::run_all_tests() {
+	test test;
+	test.test_x_transform();
+	test.test_y_transform();
+	test.test_z_transform();
+	test.test_transform_on_empty();
+	test.test_rotation();
+	test.test_scale();
+}
