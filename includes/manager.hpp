@@ -24,7 +24,6 @@ class manager {
 		void process_input();
 		void process_solids();
 		void render_all();
-		// void add_axis();
 		void draw_text(); 
 
 	private:

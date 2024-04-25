@@ -107,21 +107,11 @@ void solid::render_into(std::priority_queue<render_object> &objects) const {
 			if (color_.b - b_change < 0) {
 				b_change = 0 - color_.b; 
 			}
-
-			// makes sure that objects far enough to be black are just set to black
-
-		/*	if ((color_.r + color_.g + color_.b + r_change +
-			     g_change + b_change) < 5) {
-				r_change = color_.r;
-				g_change = color_.g;
-				b_change = color_.b;
-			}*/
 		}
 		convex->setFillColor(sf::Color(color_.r - r_change,
 					color_.g - g_change,
 					color_.b - b_change));
-		//convex->setFillColor(
-		//sf::Color(rand() % 255, rand() % 255, rand() % 255));
+
 		objects.push(render_object(convex, min_z,
 		PRIORITIES::PLANE));
 
@@ -139,11 +129,6 @@ void solid::render_into(std::priority_queue<render_object> &objects) const {
 			line->rotate(angle * 180 / M_PI);
 			line->setPosition(point1);
 			line->setOrigin(0, 2);
-			/*if (color_ == sf::Color::White) {
-				line->setFillColor(sf::Color(128, 128, 128)); 
-			} else {
-				line->setFillColor(sf::Color::White);
-			}*/
 
 			if (color_.r - r_change + 20 > 255) {
 				r_change = 20; 
