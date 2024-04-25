@@ -3,10 +3,11 @@
 
 class test {
 	public:
-		void test_transform();
-		void test_rotation();
-		void test_scale();
+		void test_x_transform();
+		void test_y_transform();
+		void test_z_transform();
 		void test_transform_on_empty();
-		void test_import_obj();
+		void test_rotation();	
+		void test_scale();
 	private:
 };
