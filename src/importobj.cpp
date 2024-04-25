@@ -3,7 +3,6 @@
 solid import_obj::import_file(std::string &path, camera *const &camera) {
 	if (path.substr(path.size() - 4, 4) != ".obj")
 		throw std::invalid_argument("File not .obj format");
-		return;
 
 	import_stream_.open(path);
 
