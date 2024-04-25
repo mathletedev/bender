@@ -1,5 +1,7 @@
 #include "test.hpp"
 
+//test the transform on the x-axis
+//verify transformed matrix values for certain test case
 void test::test_x_transform() {
 	transform testData;
 	sf::Vector3f vertex(0,0,0);
@@ -13,6 +15,8 @@ void test::test_x_transform() {
 	}
 }
 
+//test the transform on the y-axis
+//verify transformed matrix values for certain test case
 void test::test_y_transform() {
 	transform testData;
 	sf::Vector3f vertex(0,0,0);
@@ -26,6 +30,8 @@ void test::test_y_transform() {
 	}
 }
 
+//test the transform on the z-axis
+//verify transformed matrix values for certain test case
 void test::test_z_transform() {
 	transform testData;
 	sf::Vector3f vertex(0,0,0);
@@ -39,7 +45,8 @@ void test::test_z_transform() {
 	}
 }
 
-
+//test the transform on an empty
+//verify transformed matrix values
 void test::test_transform_on_empty() {
 	transform testData;
 	sf::Vector3f vertex(0,0,0);
@@ -53,6 +60,9 @@ void test::test_transform_on_empty() {
 	}
 }
 
+
+//test rotation
+//rotate 90 degrees clockwise on test case
 void test::test_rotation() {
 	transform testData;
 	sf::Vector3f vertex(1,1,1);
@@ -66,6 +76,8 @@ void test::test_rotation() {
 	}
 }
 
+//test scale
+//scale up by two
 void test::test_scale() {
 transform testData;
 	sf::Vector3f vertex(1,0,0);
@@ -79,6 +91,7 @@ transform testData;
 	}
 }
 
+//run all tests, wrapper function
 void test::run_all_tests() {
 	test test;
 	test.test_x_transform();
