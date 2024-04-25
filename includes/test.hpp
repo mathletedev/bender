@@ -9,6 +9,6 @@ class test {
 		void test_transform_on_empty();
 		void test_rotation();	
 		void test_scale();
-		void run_all_tests()
+		void run_all_tests();
 	private:
 };
