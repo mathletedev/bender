@@ -5,7 +5,7 @@
 
 int main() {
 	test test;
-	test.test_transform();
+	test.run_all_tests();
 	manager manager;
 	manager.run();
 
