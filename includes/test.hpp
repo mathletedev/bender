@@ -7,6 +7,6 @@ class test {
 		void test_rotation();
 		void test_scale();
 		void test_transform_on_empty();
-		void test_solid();
+		void test_import_obj();
 	private:
 };
