@@ -1,8 +1,11 @@
 //Made by Neal Wang, Peter Liu, Charles Liu, Eric Du
 
 #include "manager.hpp"
+#include "test.hpp"
 
 int main() {
+	test test;
+	test.test_transform();
 	manager manager;
 	manager.run();
 
