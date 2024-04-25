@@ -6,6 +6,7 @@
 #include "transform.hpp"
 #include <cmath>
 
+//test class to test/verify basic matrix transformation functionality and values for set cases
 class test {
 	public:
 		void test_x_transform();
